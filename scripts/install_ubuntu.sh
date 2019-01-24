@@ -7,8 +7,11 @@ if [ "$(id -u)" -ne 0 ]; then
 fi 
 
 # Install Dependencies
+apt install -y curl sed
+
+# Install Node.js and NPM
 curl -sL https://deb.nodesource.com/setup_10.x | bash -
-apt install -y curl sed nodejs
+apt install -y nodejs
 
 # Get Binary Packages Information
 EOSIO_DOWNLOAD_URL=$(curl --silent "https://api.github.com/repos/EOSIO/eos/releases/latest" | grep "browser_download_url.*ubuntu-18.04_amd64.deb" | cut -d ":" -f 2,3 | tr -d \")

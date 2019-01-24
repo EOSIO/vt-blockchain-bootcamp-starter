@@ -97,7 +97,7 @@ In the (blockchain) terminal window, execute this command:
 ./start_blockchain.sh
 ```
 
-The blockchain will be resumed automatically and the log will be outputted to data/nodeos.log.
+The blockchain will be resumed automatically and the log will be output to data/nodeos.log.
 
 **restarting the DApp**
 

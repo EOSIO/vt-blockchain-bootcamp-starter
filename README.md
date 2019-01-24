@@ -8,7 +8,7 @@ NoteChain demonstrates the eosio platform running a blockchain as a local single
 - Connecting the UI to the blockchain using eosjs;
 - Styling the UI using Material-UI.
 
-Github eosio-project-boilerplate-simple (https://github.com/EOSIO/eosio-project-boilerplate-simple) contains the UI and Smart Contract code, as well as setup scripts which will initialise and start all the necessary components.
+vt-blockchain-bootcamp-starter (https://github.com/EOSIO/vt-blockchain-bootcamp-starter) contains the UI and Smart Contract code, as well as setup scripts which will initialise and start all the necessary components.
 
 The sample DApp demonstrates storing data in multi index table and retrieving this data into the web based UI. NoteChain is a simple note taking application, where notes are tied to user accounts. For this example, all accounts are pre-created by scripts and the account details are displayed at the bottom of the NoteChain UI.
 
@@ -26,7 +26,7 @@ The DApp and eosio will occupy the ports 3000, 8888 and 9876. Make sure nothing 
 
 Clone the repository:
 ```sh
-git clone https://github.com/EOSIO/eosio-project-boilerplate-simple.git
+git clone https://github.com/EOSIO/vt-blockchain-bootcamp-starter
 ```
 
 The following guide assumes you are using macOS.
@@ -118,7 +118,7 @@ This removes all data on the blockchain, including accounts, deployed smart cont
 ## Project structure
 
 ```js
-eosio-project-boilerplate-simple // project directory
+vt-blockchain-bootcamp-starter // project directory
 └── blockchain
 │   └── contracts // this folder contains the smart contracts
 │   │   └── notechain

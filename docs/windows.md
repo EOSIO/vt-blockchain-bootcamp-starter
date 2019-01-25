@@ -2,7 +2,7 @@
 
 ## Windows 8 or Lesser
 
-[Click here](virtual_machine.md) to continue
+[Click here](virtual-machine.md) to continue
 
 ## Windows 10 
 

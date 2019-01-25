@@ -1,5 +1,5 @@
 # Overview
-NoteChain demonstrates the eosio platform running a blockchain as a local single node test net with a simple DApp, NoteChain. NoteChain allows users to create and update notes. This guide uses scripts, containing relevant commands, which will show you how to install, build and run NoteChain, and by doing so will demonstrate:
+NoteChain demonstrates the eosio platform running a blockchain as a local single node test net with a simple web app, NoteChain. NoteChain allows users to create and update notes. This guide uses scripts, containing relevant commands, which will show you how to install, build and run NoteChain, and by doing so will demonstrate:
 
 - Setting up and running a local single node testnet;
 - Setting up wallets, keys, and accounts;
@@ -10,11 +10,11 @@ NoteChain demonstrates the eosio platform running a blockchain as a local single
 
 vt-blockchain-bootcamp-starter (https://github.com/EOSIO/vt-blockchain-bootcamp-starter) contains the UI and Smart Contract code, as well as setup scripts which will initialise and start all the necessary components.
 
-The sample DApp demonstrates storing data in multi index table and retrieving this data into the web based UI. NoteChain is a simple note taking application, where notes are tied to user accounts. For this example, all accounts are pre-created by scripts and the account details are displayed at the bottom of the NoteChain UI.
+The sample web app demonstrates storing data in multi index table and retrieving this data into the web based UI. NoteChain is a simple note taking application, where notes are tied to user accounts. For this example, all accounts are pre-created by scripts and the account details are displayed at the bottom of the NoteChain UI.
 
 Each account can then be used to add a note to the blockchain. The individual notes are saved in a multi-index table and for simplicity are of fixed width. Each account may have one note attached to it, adding a note to an account with an existing note will replace the existing note with a new note.
 
-**Any private keys you see in this repository are for demo purposes only. For a real DApp NEVER expose the private keys.**
+**Any private keys you see in this repository are for demo purposes only. For a real web app NEVER expose the private keys.**
 
 # Prerequisites
 
@@ -22,7 +22,7 @@ Make sure Node.js is installed
 
 * Install Node.js: https://nodejs.org/en/
 
-The DApp and eosio will occupy the ports 3000, 8888 and 9876. Make sure nothing else is already running on these ports.
+The web app and eosio will occupy the ports 3000, 8888 and 9876. Make sure nothing else is already running on these ports.
 
 Clone the repository:
 ```sh
@@ -43,7 +43,7 @@ In this section we will describe in detail each script used to run the NoteChain
 
 Executing the above shell script verifies that all dependencies are installed. It then downloads and installs the eosio and eosio.cdt binary packages, and installs node packages for the frontend react app.
 
-## Initialise and start blockchain and DApp
+## Initialise and start blockchain and web app
 
 After the initialisation, two terminal windows are required, both opened in the repository directory
 
@@ -65,7 +65,7 @@ will:
 
 eosio is now running and starts producing blocks.
 
-**running the DApp**
+**running the web app**
 
 For the second (frontend) terminal window, running
 ```sh
@@ -73,7 +73,7 @@ For the second (frontend) terminal window, running
 ```
 will open a browser session connecting to http://localhost:3000/ showing the react app. You can try to add or remove notes using one of the pre-created accounts with its key on the website. This react app will interact with the smart contract, performing transactions, which are written to the blockchain, which stores note data in the multi index table of the smart contract running on your local nodeos.
 
-## Stopping blockchain or DApp
+## Stopping blockchain or web app
 
 **stopping the blockchain**
 
@@ -84,11 +84,11 @@ killall nodeos
 
 This action will take a few seconds. The blockchain will be stopped.
 
-**stopping the DApp**
+**stopping the web app**
 
 In the (frontend) terminal window, press `ctrl+c` on your keyboard. The frontend react app will be stopped.
 
-## Restarting blockchain or DApp
+## Restarting blockchain or web app
 
 **restarting the blockchain**
 
@@ -99,7 +99,7 @@ In the (blockchain) terminal window, execute this command:
 
 The blockchain will be resumed automatically and the log will be output to data/nodeos.log.
 
-**restarting the DApp**
+**restarting the web app**
 
 In the second (frontend) terminal window, you can restart the frontend react app by executing:
 ```sh

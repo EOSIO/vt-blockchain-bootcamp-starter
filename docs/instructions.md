@@ -368,13 +368,18 @@ git clone https://github.com/EOSIO/eosio.contracts.git
 Change directories...
 
 ```bash
-cd eosio.contracts
+cd eosio.contracts/eosio.token
 ```
 
 First, we need to create an account for the contract. Earlier, you copy and pasted a public key that you generated somewhere. Go get that public key now, and replaced `PUBLICKEY` below. If you cannot find it, no worries, just use `cleos wallet list` to list show your public keys. 
 
 ```bash
 cleos create account eosio eosio.token PUBLICKEY
+```
+
+Next we need to compile the eosio.token contract. Enter the following in your terminal
+```bash
+eosio-cpp -I include -o eosio.token.wasm src/eosio.token.cpp --abigen
 ```
 
 Then we need to upload the smart contract:

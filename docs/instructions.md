@@ -362,7 +362,7 @@ EOSIO has a standard token interface that we'll now explore. But before we begin
 
 ```bash
 cd ~/VTBootCamp
-git clone git@github.com:EOSIO/eosio.contracts.git
+git clone https://github.com/EOSIO/eosio.contracts.git
 ```
 
 Change directories...

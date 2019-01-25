@@ -4,7 +4,7 @@ Follow steps to install Windows Subsystem for Linux found at https://docs.micros
 ## Download Ubuntu 18.04
 - Open *Microsoft Store*
 - Search for Ubuntu 18.04
-- Click "Install" at the top right of the page. 
+- Click the blue "Get" button at the top right of the page. 
 
 ## Configure Ubuntu 18.04 on WSL
 - Launch **Ubuntu 18.04** Windows Application

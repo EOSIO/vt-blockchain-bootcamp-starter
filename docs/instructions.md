@@ -1,9 +1,5 @@
 # Before we Begin
 
-## Linux
-
-This guide assumes that if you are using Linux, you're using Ubuntu. If using a different Linux Distro, please 
-
 ## Terminal
 
 Throughout this guide we will be referring to the CLI (Command Line Interface) as "Terminal." Depending upon your system of choice, your "Terminal" will be located in one of three places.
@@ -15,7 +11,6 @@ Throughout this guide we will be referring to the CLI (Command Line Interface) a
 Please open your "Terminal" now.
 
 ## C++ coding environment setup
-
 
 We can use any text editor that, preferrably, supports c++ highlighting. If you already have an editor/IDE that you are familiar and comfortable with, please use it.
 

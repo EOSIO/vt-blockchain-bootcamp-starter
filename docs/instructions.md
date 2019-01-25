@@ -159,7 +159,7 @@ Next create a key in your wallet.
 cleos wallet create_key
 Created new private key with a public key of: "EOS74GhNdMRYtej..."
 ```
-Your key is now imported into the wallet. 
+Your key is now imported into the wallet. We will be using this key a few more times throughout the guide, so copy it somewhere easy to access. 
 
 ```bash
 cleos wallet list
@@ -171,8 +171,8 @@ The output should be following:
 Wallets:
 [
   "default *",
-  "eosiomain",
-  "notechainwal"
+  "eosiomain *",
+  "notechainwal *"
 ]
 ```
 
@@ -187,10 +187,9 @@ This will output your `public key`
 ```
 [
   "EOS74GhNdMRYtejhr1mBBTkK21x33thf4cD2i3ndfeNnBq9s72WK5"
+  ...
 ]
 ```
-
-We will be using this key a few more times throughout the guide, so copy it somewhere easy to access. 
 
 Every EOSIO blockchain has a default user, called `eosio`. This account has full privileges over the network, and can essentially do whatever it wants. On a public network, control over this account is resigned as one of prerequisite signals that any particular EOSIO blockchain is sufficient for public use. For development purposes `eosio`'s control is retained to enable more efficient development processes.
 

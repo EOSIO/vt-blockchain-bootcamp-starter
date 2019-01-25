@@ -20,7 +20,20 @@ However, if you do not presently have an Editor, we suggest downloading [VS Code
 
 # Create a Project Directory
 
-You'll need a project to work from for the duration of this guide. To make things easy, we're asking that you follow our directory naming exactly, as it will enable you to follow our guide far more easily. 
+You'll need a project to work from for the duration of this guide. To make things easy, we're asking that you follow our directory naming exactly, as it will enable you to follow our guide far more easily.
+
+## Windows Subsystem for Linux ##
+
+From your Ubuntu 18.04 terminal, enter the following
+
+```bash
+mkdir /mnt/c/VTBootCamp
+cd ~
+ln -s /mnt/c/VTBootCamp
+cd ~/VTBootCamp
+```
+
+## MacOS and Ubuntu 18.04 ##
 
 Enter the following into terminal
 
@@ -33,7 +46,7 @@ To create the *VTBootCamp* directory in your home directory.
 Change to the home directory.
 
 ```bash
-cd ~/tVTBootCamp
+cd ~/VTBootCamp
 ``` 
 
 # Start your dev environment:

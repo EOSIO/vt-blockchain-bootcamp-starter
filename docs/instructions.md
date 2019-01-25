@@ -38,7 +38,7 @@ To create the *VTBootCamp* directory in your home directory.
 Change to the home directory.
 
 ```bash
-cd VTBootCamp
+cd ~/tVTBootCamp
 ``` 
 
 # Start your dev environment:
@@ -91,6 +91,7 @@ Open a new terminal window, and start the frontend server.
 *If you're using Ubuntu 18.04 on Windows Subsystem for Linux* simply open another *Ubuntu 18.04* application window. 
 
 ```bash
+cd ~/VTBootCamp/vt-blockchain-bootcamp-starter
 ./start_frontend.sh
 ```
 After a short setup process your browser should automatically open a new tab on `http://localhost:3000/`

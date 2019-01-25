@@ -149,7 +149,8 @@ Moments ago you save your password, enter it when prompted.
 
 Next create a key in your wallet. 
 
-```cleos wallet create_key
+```bash
+cleos wallet create_key
 Created new private key with a public key of: "EOS74GhNdMRYtej..."
 ```
 Your key is now imported into the wallet. 

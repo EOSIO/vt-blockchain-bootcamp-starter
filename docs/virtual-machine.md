@@ -10,11 +10,11 @@ For **any Version of Windows older than Windows 10 Fall Creator's Update**, whic
 
 ### VirtualBox
 
-Download from [virtualbox.com](https://www.virtualbox.org/wiki/Downloads) or just [click here](https://download.virtualbox.org/virtualbox/6.0.2/VirtualBox-6.0.2-128162-Win.exe)
+Download from [virtualbox.com](https://www.virtualbox.org/wiki/Downloads) or [click here](https://download.virtualbox.org/virtualbox/6.0.2/VirtualBox-6.0.2-128162-Win.exe)
 
 ### Ubuntu
 
-Download the Ubuntu 18.04.1 LTS ISO from Ubuntu or just [https://www.ubuntu.com/download/desktop](https://www.ubuntu.com/download/desktop/thank-you?country=US&version=18.04.1&architecture=amd64)
+Download the Ubuntu 18.04.1 LTS ISO from Ubuntu or [click here](https://www.ubuntu.com/download/desktop/thank-you?country=US&version=18.04.1&architecture=amd64)
 
 ## Setup Virtual Box
 

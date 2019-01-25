@@ -1,4 +1,4 @@
-# Windows 10 before Fall Creator's Update 
+# Any Version of Windows older than Windows 10 Fall Creator's Update 
 If you're running Windows 10, Less than Build 16215, you cannot use Windows Subsystem for Linux, so you will need to install a VM. 
 
 ## System Minimum Requirements

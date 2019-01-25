@@ -1,11 +1,18 @@
-## Install Windows Subsystem for Linux
-Follow steps to install Windows Subsystem for Linux <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" target="_blank">found here</a>
+# Enable Windows Subsystem for Linux (WSL) 
+First, you're need to enable WSL
 
-## Download Ubuntu 18.04
-- Open *Microsoft Store*
-- Search for Ubuntu 18.04
-- Click the blue "Get" button at the top right of the page. 
+1. Open PowerShell application as an administrator ([How to](https://www.thewindowsclub.com/how-to-open-an-elevated-powershell-prompt-in-windows-10))
+2. Execute the following command within the PowerShell window. 
+```powershell
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux 
+```
+3. Restart your computer when the prompt is shown. 
 
-## Configure Ubuntu 18.04 on WSL
-- Launch **Ubuntu 18.04** Windows Application
-- Configure your username and password.
+# Download Ubuntu 18.04
+4. Open *Microsoft Store*
+5. Search for Ubuntu 18.04
+6. Click the blue "Get" button at the top right of the page. 
+
+# Configure Ubuntu 18.04 on WSL
+7. Launch **Ubuntu 18.04** Windows Application
+8. Configure your username and password.

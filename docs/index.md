@@ -10,4 +10,4 @@ You're good to go!
 
 ### Windows
 
-Please click here and closely [follow the guides](windows.md). 
+Please [follow the Windows Preparation Guide](windows.md). 

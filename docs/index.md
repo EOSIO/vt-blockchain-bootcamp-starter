@@ -8,4 +8,6 @@ You may or may not require some preconfiguration of your machine before the Bloc
 
 You're good to go! :100: 
 
+## Windows
+
 If the machine you are bringing to the Bootcamp is Windows, please click here and [follow the guides](windows.md). 

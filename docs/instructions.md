@@ -245,10 +245,11 @@ We need to navigate to the directory you created earlier.
 cd ~/VTBootCamp
 ```
 
-Next, create a directory to store the contract. 
+Next, create and navigate into a directory to store the contract. 
 
 ```bash
 mkdir helloworld
+cd helloworld
 ```
 
 Create the file that will contain the logic for our simple contract.

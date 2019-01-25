@@ -1,9 +1,3 @@
-- Open terminal
-- Define what "terminal" is for each platform.
-- run first_time_setup.sh
-- "when you need to do this or that to nodeos go here" reference the starter-kit readme
-- Use your editor of choice, if you do not presently have an editor, consider VS Code link.
-
 # Before we Begin
 
 ## Linux

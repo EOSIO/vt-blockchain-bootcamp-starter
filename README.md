@@ -8,7 +8,7 @@ NoteChain demonstrates the eosio platform running a blockchain as a local single
 - Connecting the UI to the blockchain using eosjs;
 - Styling the UI using Material-UI.
 
-vt-blockchain-bootcamp-starter (https://github.com/EOSIO/vt-blockchain-bootcamp-starter) contains the UI and Smart Contract code, as well as setup scripts which will initialise and start all the necessary components.
+This GitHub repo (https://github.com/EOSIO/vt-blockchain-bootcamp-starter) contains the UI and Smart Contract code, as well as setup scripts which will initialise and start all the necessary components.
 
 The sample web app demonstrates storing data in multi index table and retrieving this data into the web based UI. NoteChain is a simple note taking application, where notes are tied to user accounts. For this example, all accounts are pre-created by scripts and the account details are displayed at the bottom of the NoteChain UI.
 

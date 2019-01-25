@@ -51,10 +51,20 @@ then
 fi
 
 # Install jq
-brew install jq
+if ! JQ=$( command -v jq)
+then
+    brew install jq
+else
+    echo "jq is already installed. Skipping."
+fi
 
 # Install Node.js and NPM
-brew install node
+if ! NODEJS=$( command -v node)
+then
+    brew install node
+else
+    echo "Node.js and NPM are already installed. Skipping."
+fi
 
 # Install EOSIO Software
 brew tap eosio/eosio && brew install eosio

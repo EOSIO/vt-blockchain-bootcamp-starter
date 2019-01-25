@@ -4,10 +4,10 @@ You may or may not require some preconfiguration of your machine before the Bloc
 
 ## Your Machine
 
-## Mac OS X or Linux
+### Mac OS X or Linux
 
 You're good to go!
 
-## Windows
+### Windows
 
 Please click here and closely [follow the guides](windows.md). 

@@ -155,9 +155,9 @@ vt-blockchain-bootcamp-starter // project directory
 
 ```
 
-## DApp development
+## Web app development
 
-The DApp consists of two parts. eosio blockchain and frontend react app. These can be found in:
+The sample web app consists of two parts, 1) eosio blockchain and 2) frontend react app. These can be found in:
 
 - blockchain
     - eosio block producing node (local node)
@@ -168,7 +168,7 @@ The DApp consists of two parts. eosio blockchain and frontend react app. These c
     - node.js development environment
         - create-react-app: http://localhost:3000/
 
-Users interact with the UI in client and sign the transaction in frontend. The signed transaction (which is an `update` action in this demo DApp) is sent to the blockchain directly. After the transaction is accepted in blockchain, the note is added into the multi index table in blockchain.
+Users interact with the UI in client and sign the transaction in frontend. The signed transaction (which is an `update` action in this demo web app) is sent to the blockchain directly. After the transaction is accepted in blockchain, the note is added into the multi index table in blockchain.
 
 The UI, index.jsx, reads the notes data directly from nodeos using 'getTableRows()'. The smart contract, notechain.cpp, stores these notes in the multi index table using 'emplace()'' and 'modify()'.
 

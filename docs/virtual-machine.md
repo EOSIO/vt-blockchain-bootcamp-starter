@@ -1,5 +1,5 @@
 # Installing Linux for Windows Systems without WSL
-For any Version of Windows older than Windows 10 Fall Creator's Update, which is defined as less than **Build 16215** you cannot use Windows Subsystem for Linux, so you will need to install a VM. (This also includes Windows 8.1, 8, 7, Vista, 2000, ME, XP, 98, 98SE, 95, NT, 3.1 ... ;) )  
+For **any Version of Windows older than Windows 10 Fall Creator's Update**, which is defined as less than **Build 16215** you cannot use Windows Subsystem for Linux, so you will need to install a VM. This means if you're running Windows 8.1, 8, 7, Vista you'll need to follow this guide.
 
 ## System Minimum Requirements
 - 4+ cores

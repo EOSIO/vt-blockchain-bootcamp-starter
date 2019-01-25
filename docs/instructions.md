@@ -112,27 +112,7 @@ The lower-half of the interface contains *accounts, public keys and private keys
 
 Copy one of the example account's information into the UI of the NoteChain application.
 
-Add some test copy in the "Note" field and press 'Add/Update Note'. As a result you should get a new note created in the frontend of the application.
-
-You should see a message similar to following:
-
-```json
-{
-    "server_version": "75635168",
-    "chain_id": "cf057bbfb72640471fd910bcb67639c22df9f92470936cddc1ade0e2f2e7dc4f",
-    "head_block_num": 2511,
-    "last_irreversible_block_num": 2510,
-    "last_irreversible_block_id": "000009ce07f8934fd8a6498e120b36b7eb012896481f5102f8cf3d9ec1c03775",
-    "head_block_id": "000009cfc8a2adf575d78218b28695615bdb6724a6e40359f96c9e1395386b14",
-    "head_block_time": "2018-08-01T06:42:39.500",
-    "head_block_producer": "eosio",
-    "virtual_block_cpu_limit": 2458387,
-    "virtual_block_net_limit": 12913257,
-    "block_cpu_limit": 199900,
-    "block_net_limit": 1048576
-}
-
-```
+Add some text in the "Note" field and press 'Add/Update Note'. As a result you should see the note appear at the top of the page.
 
 More in-depth documentation for the example app with additional commands can be found here: [https://github.com/EOSIO/vt-blockchain-bootcamp-starter](https://github.com/EOSIO/vt-blockchain-bootcamp-starter)
 

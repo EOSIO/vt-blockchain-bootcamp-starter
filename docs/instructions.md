@@ -33,6 +33,8 @@ ln -s /mnt/c/VTBootCamp
 cd ~/VTBootCamp
 ```
 
+Some instructions below will ask you to create and modify files. You can either use a terminal based editor (vim, nano, etc) within the Ubuntu 18.04 terminal, or you can use a gui based editor within Windows. All the files can be found at `C:\VTBootCamp`. You may edit them there, and then resume the tutorial in the Ubuntu 18.04 terminal.
+
 ## MacOS and Ubuntu 18.04 ##
 
 Enter the following into terminal

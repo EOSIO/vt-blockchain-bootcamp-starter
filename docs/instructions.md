@@ -347,7 +347,7 @@ helloworld.wasm # this is the compiled WASM file
 Congratulations, You have created your first smart contract. Time to deploy this contract to the blockchain.
 
 ```bash
-cleos set contract helloworld ~/VTBootCamp/helloworld/helloworld.wasm --permission helloworld@active
+cleos set contract helloworld ~/VTBootCamp/helloworld --permission helloworld@active
 ```
 
 Run the transaction:

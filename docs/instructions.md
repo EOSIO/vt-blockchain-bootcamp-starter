@@ -879,12 +879,15 @@ Create another account, this one will be used to store the smart contract for th
 cleos create account eosio addressbook PUBLICKEY
 ```
 
-Now we need to compile and upload the smart contract:
+Now we need to compile the smart contract:
 
 ```bash
 eosio-cpp -o ~/VTBootCamp/addressbook/addressbook.wasm ~/VTBootCamp/addressbook/addressbook.cpp --abigen --contract addressbook
+```
 
-# notice we are using the path to the contract inside the container, not the local path
+Next, we need to upload the smart contract:
+
+```bash
 cleos set contract addressbook ~/VTBootCamp/addressbook -p addressbook@active
 ```
 

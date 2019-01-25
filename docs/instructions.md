@@ -228,7 +228,7 @@ touch example.cpp
 subl ./example.cpp
 ```
 
-Our example contract will be very simple. It will take a username as an argument and will publish a "Hello, username" message to the blockchain. It's quite useless, but good for a demo. We hope your smart contracts will be more sophisticated :)
+Our example contract will be very simple. It will take a username as an argument and will publish a "Hello, username" message to the blockchain. It's quite useless, but good for understanding how smart contracts work. We hope your smart contracts will be more sophisticated :)
 
 Open `example.cpp` file in your editor and paste following code:
 
@@ -280,23 +280,11 @@ This is a standard implementation of a contract structure that has one method ca
 EOSIO_DISPATCH( example, (hi))
 ```
 
-This line exposes the method `hi` to the ABI file. ABI file is like an address book that shows what are the methods and what are their parameters inside smart contract that can be called by your app.
+`EOSIO_DISPATCH` is a C++ macro that expands into a dispatcher. Requests to a smart contract are sent to compiled WASM as a binary blob which are then unpacked, and routed to your action based on the logic inside your pre-compilation smart contract logic. ABI files enable the easy description of  ABI file is like an address book that shows what are the methods and what are their parameters inside smart contract that can be called by your app.
 
 ## eosio.cdt
 
-eosio.cdt is a toolchain for WebAssembly (WASM) and set of tools to facilitate contract writing and compilation for the EOSIO platform.
-
-eosio.cdt currently supports Mac OS X brew, Linux x86_64 Debian packages, and Linux x86_64 RPM packages.
-
-**If you have previously installed EOSIO.CDT, please run the `uninstall` script (it is in the directory where you cloned EOSIO.CDT) before downloading and using the binary releases.**
-
-### Mac OS X Brew Install
-```sh
-$ brew tap eosio/eosio.cdt
-$ brew install https://raw.githubusercontent.com/EOSIO/homebrew-eosio.cdt/50f00447765854f6e4e3b2d4ef36324cc38e5362/eosio.cdt.rb 
-```
-
-For more installation options for other systems please follow a guide here: [https://github.com/EOSIO/eosio.cdt/blob/master/README.md](https://github.com/EOSIO/eosio.cdt/blob/master/README.md)
+eosio.cdt is a toolchain for WebAssembly (WASM) and set of tools to facilitate contract writing and compilation for the EOSIO platform. We installed `eosio.cdt` for you when you ran the `first_time_setup.sh`, you can 
 
 ## Compile the smart contract
 
@@ -305,27 +293,27 @@ First we need to generate a WASM file. A WASM file is a compiled smart contract 
 `eosio-cpp` is the WASM compiler and an ABI generator utility. Before uploading the smart contract to the network we need to compile it from C++ to WASM.
 
 ```
-eosio-cpp -o ~/vt-blockchain-bootcamp-starter/eosio_docker/contracts/example/example.wasm ~/vt-blockchain-bootcamp-starter/eosio_docker/contracts/example/example.cpp --abigen --contract example
+eosio-cpp -o ~/vt-blockchain-bootcamp-starter/blockchain/contracts/example/example.wasm ~/vt-blockchain-bootcamp-starter/blockchain/contracts/example/example.cpp --abigen --contract example
 ```
 
 Now in the folder `` you will see three files:
 
 ```bash
 example.cpp  # this is source code of the example contract
-example.abi  # this is the ABI file - public interface in the smart contract
+example.abi  # this is the ABI file - describes the interface of the smart contract
 example.wasm # this is the compiled WASM file
 ```
 
-Congratulations! You have created your first smart contract! Lets upload this contract to the blockchain:
+Congratulations, You have created your first smart contract. Lets upload this contract to the blockchain:
 
 ```bash
-cleos set contract testacc /opt/eosio/bin/contracts/example/ --permission testacc@active
+cleos set contract testaccount ~/vt-blockchain-bootcamp-starter/blockchain/contracts/example/example.wasm --permission testacc@active
 ```
 
 Run the transaction:
 
 ```bash
-cleos push action testacc hi '["testacc"]' -p testacc@active
+cleos push action testaccount hi '["testacc"]' -p testacc@active
 ```
 
 ## EOSIO token contract
@@ -372,10 +360,10 @@ This time the output contains several different actions: one issue and three tra
 
 Technically, the eosio.token contract could have skipped the inline transfer and opted to just modify the balances directly. However, in this case, the eosio.token contract is following our token convention that requires that all account balances be derivable by the sum of the transfer actions that reference them. It also requires that the sender and receiver of funds be notified so they can automate handling deposits and withdrawals.
 
-Let's check `testacc`'s balance:
+Let's check `testaccount`'s balance:
 
 ```bash
-cleos get table eosio.token testacc accounts
+cleos get table eosio.token testaccount accounts
 ```
 
 You should see following output:
@@ -393,7 +381,7 @@ You should see following output:
 Now, let's send some tokens to another user! 
 
 ```bash
-cleos push action eosio.token transfer '[ "testacc", "eosio", "25.0000 HAK", "m" ]' -p testacc@active
+cleos push action eosio.token transfer '[ "testacc", "eosio", "25.0000 HAK", "m" ]' -p testaccount@active
 ```
 
 Nailed it! Let's check the balance is correct:
@@ -498,7 +486,6 @@ struct person {
 ```
 
 Great. The basic schema is now complete. Next, define a `primary_key` method, which will be used by `multi_index` iterators. Every multi_index schema requires a primary key. To accomplish this you simply create a method called `primary_key()` and return a value, in this case, the `key` member as defined in the struct.
-
 
 ```cpp
 struct person {

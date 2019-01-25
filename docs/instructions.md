@@ -211,15 +211,15 @@ You'll be presented with a password prompt, copy the key below and paste it into
 
 Now lets create some user accounts.
 
-To create a new account on your single-node testnet, use [cleos create account](https://developers.eos.io/eosio-cleos/reference#cleos-create-account) as demonstrated below.
+To create a new account on your single-node testnet, use [cleos create account](https://developers.eos.io/eosio-cleos/reference#cleos-create-account) as demonstrated below. Replace *PUBLICKEY* with the key starting with *EOS* that you saved in the previous step.
 
 ```bash
-cleos create account helloworld PUBLICKEY -p eosio@active
+cleos create account eosio helloworld PUBLICKEY -p eosio@active
 ```
 
 Let's explore what just happened in the interaction between cleos (your CLI client) and keosd (the wallet process)
 
-- `cleos create account` created a transaction that includes an action called "createaccount" which instructs the blockchain to *create an account* named *helloworld* with the same *PUBLICKEY* assigned to both the *owner* and *active* permission of the account. 
+- `cleos create account` created a transaction that includes an action called "createaccount" which instructs the blockchain to *create an account* by the *eosio* account named *helloworld* with the same *PUBLICKEY* assigned to both the *owner* and *active* permission of the account. 
 - cleos passes this created transaction to keosd to be signed, along with some extra data. 
 - The `-p eosio@active` part at the end of the command instructs cleos to explicitly ask keosd (again, the wallet process) to search for a key that fulfills the authorization requirements for the `active` permission  of the `eosio` account. 
 - We imported the eosio account's key earlier in this guide. So when keosd has confirmed this, keosd signs the provided transaction without exposing the private keys and returns the signed transaction to cleos.

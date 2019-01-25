@@ -171,7 +171,7 @@ The UI, index.jsx, reads the notes data directly from nodeos using 'getTableRows
 
 The smart contract can be found at `blockchain/contracts/notechain/notechain.cpp`, you can edit this smart contract. You will then need to compile and deploy the contract to the blockchain.
 
-To save time, we prepared some scripts for you. Execute the scripts in the container bash (see above.)
+To save time, we prepared some scripts for you. Execute the scripts via your terminal (see above.)
 
 The following script will help you to unlock the wallet, compile the modified contract and deploy to blockchain. 1st parameter is the contract name; 2nd parameter is the account name of the contract owner, 3rd and 4th parameter references  wallet related information that was created during the `Initial setup`:
 

@@ -118,6 +118,12 @@ More in-depth documentation for the example app with additional commands can be 
 
 # Cleos
 
+Open a new terminal window and execute the following
+
+```bash
+cd ~/VTBootCamp
+``` 
+
 `cleos` is a _command line interface_ (CLI) to interact with the blockchain and to manage wallets.
 
 Execute `cleos --help` in your terminal to get a top-level help text. You can also just call `cleos` or `cleos subcomand` without any parameters to output help text. For example `cleos wallet`, will output help text in the context of `wallet` 

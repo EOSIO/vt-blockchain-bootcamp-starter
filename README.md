@@ -77,12 +77,7 @@ will open a browser session connecting to http://localhost:3000/ showing the rea
 
 **stopping the blockchain**
 
-In the (blockchain) terminal window, simply execute:
-```sh
-killall nodeos
-```
-
-This action will take a few seconds. The blockchain will be stopped.
+In the (blockchain) terminal window, press `ctrl+c` on your keyboard. Nodeos will be stopped.
 
 **stopping the web app**
 
@@ -174,7 +169,7 @@ The UI, index.jsx, reads the notes data directly from nodeos using 'getTableRows
 
 ## Smart contract (Blockchain):
 
-The smart contract can be found at `blockchain/contracts/notechain/notechain.cpp`(host environment), you can edit this smart contract. You will then need to compile and deploy the contract to the blockchain.
+The smart contract can be found at `blockchain/contracts/notechain/notechain.cpp`, you can edit this smart contract. You will then need to compile and deploy the contract to the blockchain.
 
 To save time, we prepared some scripts for you. Execute the scripts in the container bash (see above.)
 

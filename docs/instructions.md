@@ -870,7 +870,7 @@ We have our table, let's test it now. First, we need to create couple of account
 Create a user account so we can test adding contact details to the address book. Replace `PUBLICKEY` with the public key you set aside earlier. 
 
 ```bash
-cleos create account eosio khaled PUBLICKEY
+cleos create account eosio josh PUBLICKEY
 ```
 
 Create another account, this one will be used to store the smart contract for the address book
@@ -882,19 +882,19 @@ cleos create account eosio addressbook PUBLICKEY
 Now we need to compile and upload the smart contract:
 
 ```bash
-eosio-cpp -o ~/vt-blockchain-bootcamp-starter/eosio_docker/contracts/addressbook/addressbook.wasm ~/vt-blockchain-bootcamp-starter/eosio_docker/contracts/addressbook/addressbook.cpp --abigen --contract addressbook
+eosio-cpp -o ~/VTBootCamp/addressbook/addressbook.wasm ~/VTBootCamp/addressbook/addressbook.cpp --abigen --contract addressbook
 
 # notice we are using the path to the contract inside the container, not the local path
-cleos set contract addressbook /opt/eosio/bin/contracts/addressbook -p addressbook@active
+cleos set contract addressbook ~/VTBootCamp/addressbook -p addressbook@active
 ```
 
-And let's add `khaled` to the database: 
+And let's add `josh` to the database: 
 
 ```bash
-cleos push action addressbook upsert '["khaled", "Khaled A", "Springfield St", "San Francisco, CA", 123456]' -p khaled
+cleos push action addressbook upsert '["josh", "Joshua A", "Springfield St", "San Francisco, CA", 123456]' -p josh
 ```
 
-Looks good! Is Khaled in?
+Looks good! Is Josh in?
 
 ```bash
 cleos get table addressbook addressbook people
@@ -905,8 +905,8 @@ The result should look like this:
 ```json
 {
   "rows": [{
-      "key": "khaled",
-      "full_name": "Khaled A",
+      "key": "josh",
+      "full_name": "Joshua A",
       "street": "Springfield St",
       "city": "San Francisco, CA",
       "phone": 123456
@@ -919,7 +919,7 @@ The result should look like this:
 What if we now need to update the first name?
 
 ```bash
-cleos push action addressbook upsert '["khaled", "Khaled A", "Market St", "San Francisco, CA", 123456]' -p khaled
+cleos push action addressbook upsert '["josh", "Joshua A", "Market St", "San Francisco, CA", 123456]' -p josh
 ```
 
 You should get the following result by repeating the last cleos command:
@@ -927,8 +927,8 @@ You should get the following result by repeating the last cleos command:
 ```json
 {
   "rows": [{
-      "key": "khaled",
-      "full_name": "Khaled A",
+      "key": "josh",
+      "full_name": "Joshua A",
       "street": "Market St",
       "city": "San Francisco, CA",
       "phone": 123456

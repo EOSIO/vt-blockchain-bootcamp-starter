@@ -157,15 +157,14 @@ cleos wallet open
 cleos wallet unlock
 ```
 
-Moments ago, you save your password, enter it when prompted. 
+Moments ago you save your password, enter it when prompted. 
 
-Next, create a key in your wallet. 
+Next create a key in your wallet. 
 
 ```cleos wallet create_key
 Created new private key with a public key of: "EOS74GhNdMRYtej..."
 ```
-
-Now lets check the wallet is there:
+Your key is now imported into the wallet. 
 
 ```bash
 cleos wallet list
@@ -198,39 +197,76 @@ This will output your `public key`
 
 We will be using this key a few more times throughout the guide, so copy it somewhere easy to access. 
 
+Every EOSIO blockchain has a default user, called `eosio`. This account has full privileges over the network, and can essentially do whatever it wants. On a public network, control over this account is resigned as one of prerequisite signals that any particular EOSIO blockchain is sufficient for public use. For development purposes `eosio`'s control is retained to enable more efficient development processes.
+
+We'll need to import the `eosio` account's private key so we can sign transactions on it's behalf. Run the following in your available terminal window and press enter,.
+
+```bash
+cleos wallet import
+```
+
+You'll be presented with a password prompt, copy the key below and paste it into the prompt. 
+
+```bash
+5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
+```
+
+**Important** The key above is a publicly known private key. You should never use this key on a production network.
+
 ## User account
 
 Now lets create some user accounts.
 
-Each account should have a Private key. Think of it as both login and password for your EOSIO account.
-
-To create a new account we need to open the eosiomain wallet and then run a cleos command:
+To create a new account on your single-node testnet, use [cleos create account](https://developers.eos.io/eosio-cleos/reference#cleos-create-account) as demonstrated below.
 
 ```bash
-cleos create account eosio 
-cleos get account testacc -j
+cleos create account helloworld PUBLICKEY -p eosio@active
 ```
 
-# Smart contract
+Let's explore what just happened in the interaction between cleos (your CLI client) and keosd (the wallet process)
 
-The folder where you should store your smart contracts is following:
+- `cleos create account` created a transaction that includes an action called "createaccount" which instructs the blockchain to *create an account* named *helloworld* with the same *PUBLICKEY* assigned to both the *owner* and *active* permission of the account. 
+- cleos passes this created transaction to keosd to be signed, along with some extra data. 
+- The `-p eosio@active` part at the end of the command instructs cleos to explicitly ask keosd (again, the wallet process) to search for a key that fulfills the authorization requirements for the `active` permission  of the `eosio` account. 
+- We imported the eosio account's key earlier in this guide. So when keosd has confirmed this, keosd signs the provided transaction without exposing the private keys and returns the signed transaction to cleos.
+- Cleos then broadcasts the signed transaction to the blockchain. 
+
+We can view that this process was success executed by calling the following. 
 
 ```bash
-cd ~/vt-blockchain-bootcamp-starter/blockchain/contracts
+cleos get account helloworld -j
 ```
 
-We need to create a new folder for our example contract.
+You'll no recieve a response that outlines the account's details. 
+
+
+# "Hello World" Smart Contract
+
+This first contract is extremely simple. It contains a single action that accepts a single parameter as an argument. The argument is used to print out a message in the log on nodeos process. Your nodeos process was started when you executed `start_blockchain.sh` earlier in this guide. 
+
+The `helloworld` contract is useless by design. It's primary purpose is to demonstrate the motions of authoring, compiling and deploying the contract to an EOSIO blockchain.
+
+We need to navigate to the directory you created earlier.
 
 ```bash
-mkdir example
-cd example
-touch example.cpp
-subl ./example.cpp
+cd ~/VTBootCamp
 ```
 
-Our example contract will be very simple. It will take a username as an argument and will publish a "Hello, username" message to the blockchain. It's quite useless, but good for understanding how smart contracts work. We hope your smart contracts will be more sophisticated :)
+Next, create a directory to store the contract. 
 
-Open `example.cpp` file in your editor and paste following code:
+```bash
+mkdir helloworld
+```
+
+Create the file that will contain the logic for our simple contract.
+
+```bash
+touch helloworld.cpp
+```
+
+Open `helloworld.cpp` file in your editor and paste following code. 
+
+*Note: If you're using WSL on Windows 10, then open the file with Windows Explorer, if you're using a VM on Windows 10, stay inside you VM.*
 
 ```cpp
 #include <eosiolib/eosio.hpp>
@@ -238,7 +274,7 @@ Open `example.cpp` file in your editor and paste following code:
 
 using namespace eosio;
 
-class [[eosio::contract]] example : public contract {
+class [[eosio::contract]] helloworld : public contract {
   public:
       using contract::contract;
 
@@ -247,40 +283,44 @@ class [[eosio::contract]] example : public contract {
          print( "Hello, ", name{user});
       }
 };
-EOSIO_DISPATCH( example, (hi))
+EOSIO_DISPATCH( helloworld, (hi))
 
 ```
 
-Let's break this contract apart in parts.
+Let's go through this contract piece by piece. 
+
+First, we need to include the EOSIO libraries necessary to expose the smart contract C++ APIs, as well EOSIO's print wrapper. 
 
 ```cpp
 #include <eosiolib/eosio.hpp>
 #include <eosiolib/print.hpp>
 ```
 
-This imports standard eosio c++ libraries. More libraries can be found in `eosiolib` folder.
-
-EOSIO contracts extend the contract class. Initialize our parent contract class with the code name of the contract and the receiver. The important parameter here is the code parameter which is the account on the blockchain that the contract is being deployed to.
+EOSIO contracts extend the contract class. 
 
 ```cpp
-class hello : public contract {
+class [[eosio::contract]] helloworld : public contract {
   public:
       using contract::contract;
-
-      [[eosio::action]]
-      void hi( name user ) {
-         print( "Hello, ", name{user});
-      }
 };
 ```
 
 This is a standard implementation of a contract structure that has one method called `hi` that takes a `user` parameter of type `name`. Then it prints out a name of this user.
 
 ```cpp
-EOSIO_DISPATCH( example, (hi))
+
+  [[eosio::action]]
+  void hi( name user ) {
+     print( "Hello, ", name{user});
+  }
 ```
 
-`EOSIO_DISPATCH` is a C++ macro that expands into a dispatcher. Requests to a smart contract are sent to compiled WASM as a binary blob which are then unpacked, and routed to your action based on the logic inside your pre-compilation smart contract logic. ABI files enable the easy description of  ABI file is like an address book that shows what are the methods and what are their parameters inside smart contract that can be called by your app.
+
+```cpp
+EOSIO_DISPATCH( helloworld, (hi))
+```
+
+`EOSIO_DISPATCH` is a C++ macro that expands into a dispatcher. Requests to a smart contract are sent to compiled WASM as a binary blob which are then unpacked, and routed to your action based on the logic inside your pre-compilation smart contract logic. ABI files are a programatic and portable representation of the actions and data types accepted by your smart contract. An ABI simplifies the process of interfacing with any provided smart contract. 
 
 ## eosio.cdt
 
@@ -290,80 +330,91 @@ eosio.cdt is a toolchain for WebAssembly (WASM) and set of tools to facilitate c
 
 First we need to generate a WASM file. A WASM file is a compiled smart contract ready to be uploded to EOSIO network.
 
-`eosio-cpp` is the WASM compiler and an ABI generator utility. Before uploading the smart contract to the network we need to compile it from C++ to WASM.
+`eosio-cpp` is the WASM compiler and an ABI generator utility. Before uploading the smart contract to the network we will need to compile it from C++ to WASM.
 
 ```
-eosio-cpp -o ~/vt-blockchain-bootcamp-starter/blockchain/contracts/example/example.wasm ~/vt-blockchain-bootcamp-starter/blockchain/contracts/example/example.cpp --abigen --contract example
+eosio-cpp -o ~/VTBootCamp/helloworld/helloworld.wasm ~/VTBootCamp/helloworld/helloworld.cpp --abigen --contract helloworld
 ```
 
-Now in the folder `` you will see three files:
+Run the following:
 
 ```bash
-example.cpp  # this is source code of the example contract
-example.abi  # this is the ABI file - describes the interface of the smart contract
-example.wasm # this is the compiled WASM file
+ls ~/VTBootCamp/helloworld
 ```
 
-Congratulations, You have created your first smart contract. Lets upload this contract to the blockchain:
+Now in the folder `~/VTBootCamp/helloworld` you will see three files:
 
 ```bash
-cleos set contract testaccount ~/vt-blockchain-bootcamp-starter/blockchain/contracts/example/example.wasm --permission testacc@active
+helloworld.cpp  # this is source code of the example contract
+helloworld.abi  # this is the ABI file - describes the interface of the smart contract
+helloworld.wasm # this is the compiled WASM file
+```
+
+Congratulations, You have created your first smart contract. Time to deploy this contract to the blockchain.
+
+```bash
+cleos set contract helloworld ~/VTBootCamp/vt-blockchain-bootcamp-starter/helloworld/helloworld.wasm --permission helloworld@active
 ```
 
 Run the transaction:
 
 ```bash
-cleos push action testaccount hi '["testacc"]' -p testacc@active
+cleos push action helloworld hi '["helloworld"]' -p helloworld@active
 ```
 
 ## EOSIO token contract
 
-Now let's get real and create a custom token. With EOSIO it's easy!
-
-First, we need to create an account for currency system contract:
+EOSIO has a standard token interface that we'll now explore. But before we begin, we'll need pull that source from the repository 
 
 ```bash
-cleos create key --to-console
-cleos create key --to-console
-cleos wallet import --private-key **PRIVATEKEY1**
-cleos wallet import --private-key **PRIVATEKEY2**
-cleos create account eosio eosio.token **PUBLICKEY1** **PUBLICKEY2**
+cd ~/VTBootCamp
+git clone git@github.com:EOSIO/eosio.contracts.git
+```
+
+Change directories...
+
+```bash
+cd eosio.contracts
+```
+
+First, we need to create an account for the contract. Earlier, you copy and pasted a public key that you generated somewhere. Go get that public key now, and replaced `PUBLICKEY` below. If you cannot find it, no worries, just use `cleos wallet list` to list show your public keys. 
+
+```bash
+cleos create account eosio eosio.token PUBLICKEY
 ```
 
 Then we need to upload the smart contract:
 
 ```bash
-cleos set contract eosio.token /contracts/eosio.token -p eosio.token
+cleos set contract eosio.token ~/VTBootCamp/eosio.contracts/eosio.token -p eosio.token
 ```
 
-Once that done, we can issue new token!
+Once that done, we can issue new token:
 
 ```bash
 cleos push action eosio.token create '{"issuer":"eosio", "maximum_supply":"1000000000.0000 HAK"}' -p eosio.token@active
 ```
 
-This command created a new token `HAK` with a precision of 4 decimals and a maximum supply of `1000000000.0000 HAK`.
+This command created a new token `HAK` with a precision of 4 decimals and a maximum supply of `1000000000.0000 HAK`. For this reason we must pass `-p eosio.token` to authorize this call.
 
-In order to create this token we required the permission of the eosio.token contract because it "owns" the symbol namespace (e.g. "HAK"). Future versions of this contract may allow other parties to buy symbol names automatically. For this reason we must pass `-p eosio.token` to authorize this call.
+## Issue Tokens to Account "helloworld"
 
-## Issue Tokens to Account "testacc"
-
-Now that we have created the token, the issuer can issue new tokens to the account user we created earlier.
+Now that we have created the token, the issuer (eosio) can issue new tokens to the account user we created earlier.
 
 We will use the positional calling convention (vs named args).
 
 ```
-cleos push action eosio.token issue '[ "testacc", "100.0000 HAK", "memo" ]' -p eosio
+cleos push action eosio.token issue '[ "helloworld", "100.0000 HAK", "memo" ]' -p eosio@active
 ```
 
 This time the output contains several different actions: one issue and three transfers. While the only action we signed was issue, the issue action performed an "inline transfer" and the "inline transfer" notified the sender and receiver accounts. The output indicates all of the action handlers that were called, the order they were called in, and whether or not any output was generated by the action.
 
-Technically, the eosio.token contract could have skipped the inline transfer and opted to just modify the balances directly. However, in this case, the eosio.token contract is following our token convention that requires that all account balances be derivable by the sum of the transfer actions that reference them. It also requires that the sender and receiver of funds be notified so they can automate handling deposits and withdrawals.
+Technically, the eosio.token contract could have skipped the inline transfer and opted to just modify the balances directly. However, in this case, the eosio.token contract is following the token convention that requires that all account balances be derivable by the sum of the transfer actions that reference them. It also requires that the sender and receiver of funds be notified so they can automate handling deposits and withdrawals.
 
-Let's check `testaccount`'s balance:
+Let's check `helloworld`'s balance:
 
 ```bash
-cleos get table eosio.token testaccount accounts
+cleos get table eosio.token helloworld accounts
 ```
 
 You should see following output:
@@ -378,16 +429,16 @@ You should see following output:
 }
 ```
 
-Now, let's send some tokens to another user! 
+Now, send some tokens to another user: 
 
 ```bash
-cleos push action eosio.token transfer '[ "testacc", "eosio", "25.0000 HAK", "m" ]' -p testaccount@active
+cleos push action eosio.token transfer '[ "helloworld", "bob", "25.0000 HAK", "m" ]' -p helloworld@active
 ```
 
 Nailed it! Let's check the balance is correct:
 
 ```bash
-cleos get table eosio.token eosio accounts
+cleos get table eosio.token bob accounts
 ```
 
 Should give you: 
@@ -403,7 +454,7 @@ Should give you:
 ```
 
 ```bash
-cleos get table eosio.token testacc accounts
+cleos get table eosio.token helloworld accounts
 ```
 
 Should give you: 
@@ -422,14 +473,14 @@ Awesome! Let's move to the next part.
 
 ## Persistence API
 
-Great, now we want to store our information in a table-like structure, similar to a database. 
+Now we want to store our information in a table-like structure, similar to a database. 
 
 Let's imagine we are building an address book where users can add their social security number, age and name. 
 
-First, create a folder in your `work` folder that will contain the contract files.
+First, create a directory
 
 ```bash
-cd ~/vt-blockchain-bootcamp-starter/eosio_docker/contracts
+cd ~/VTBootCamp
 mkdir addressbook
 cd addressbook
 ```
@@ -438,8 +489,9 @@ And create a new `.cpp` file:
 
 ```bash
 touch addressbook.cpp
-subl ./addressbook.cpp
 ```
+
+Now this file in your code editor.
 
 Let's create a standard structure for a contract file:
 
@@ -457,13 +509,13 @@ class addressbook : public eosio::contract {
 };
 ```
 
-Before a table can be configured and instantiated, a struct that represents the data structure of the address book needs to be written. Think of this as a "schema." Since it's an address book, the table will contain people, so create a struct called "person"
+Before a table can be configured and instantiated, a struct that represents the data structure of the address book needs to be written. Since it's an address book, the table will contain people, so create a struct called "person"
 
 ```cpp
 struct person {};
 ```
 
-When defining the schema for a `multi_index` table, you will require a unique value to use as the primary key.
+When defining the struct for a `multi_index` table, you will require a unique value to use as the primary key.
 
 For this contract, use a field called "key" with type name. This contract will have one unique entry per user, so this key will be a consistent and guaranteed unique value based on the user's name.
 
@@ -485,7 +537,7 @@ struct person {
 };
 ```
 
-Great. The basic schema is now complete. Next, define a `primary_key` method, which will be used by `multi_index` iterators. Every multi_index schema requires a primary key. To accomplish this you simply create a method called `primary_key()` and return a value, in this case, the `key` member as defined in the struct.
+The data structure for *person* is now complete. Next, define a `primary_key` member function, which will be used by `multi_index` iterator. Every multi_index struct requires a primary key. To accomplish this you simply create a member function called `primary_key()` and return a value, in this case, the `key` member function as defined in the struct.
 
 ```cpp
 struct person {
@@ -499,10 +551,9 @@ struct person {
 };
 ```
 
-*Note: A table's schema cannot be modified while it has data in it. If you need to make changes to a table's schema in any way, you first need to remove all its rows*
+*Note: A table's data structure cannot be modified while it has data in it. If you need to make changes to a table's schema in any way, you first need to remove all its rows. Thus, it's important to design your multi_index data structures carefully*
 
-
-Add the `struct` in `private` as a private field:
+Add the `struct` in the `private` namespace.
 
 ```cpp
 #include <eosiolib/eosio.hpp>
@@ -525,7 +576,7 @@ class addressbook : public eosio::contract {
 };
 ```
 
-Now that the schema of the table has been defined with a struct we need to configure the table. The `eosio::multi_index` constructor needs to be named and configured to use the struct we previously defined.
+Now that the data structure of the table has been defined with a struct we need to configure the table. The `eosio::multi_index` constructor needs to be named and configured to use the struct we previously defined.
 
 ```cpp
 // We setup the table usin multi_index container:
@@ -571,13 +622,14 @@ class addressbook : public eosio::contract
 
 Next, define an action for the user to add or update a record. This action will need to accept any values that this action needs to be able to emplace (create) or modify.
 
-
 ```cpp
 void upsert(name user, std::string full_name, std::string street, std::string city, uint32_t phone) {
 }
 ```
 
-Earlier, it was mentioned that only the user has control over their own record, as this contract is opt-in. To do this, utilize the require_auth method provided by the eosio.cdt. This method accepts one argument, an name type, and asserts that the account executing the transaction equals the provided value.
+Earlier, it was mentioned that only the user has control over their own record, as this contract is opt-in. To do this, utilize the `require_auth` method provided by the `eosio.cdt` library. 
+
+This method accepts one argument, a name type, and asserts that the account executing the transaction equals the provided value. If this condition returns true, where the user provided as an argument in `upsert` does not equal the authorizing user, the action with unwind all progress before failing. 
 
 ```cpp
 void upsert(name user, std::string full_name, std::string street, std::string city, uint32_t phone) {
@@ -585,10 +637,10 @@ void upsert(name user, std::string full_name, std::string street, std::string ci
 }
 ```
 
-Instantiate the table. Previously, a `multi_index table` was configured, and declared it as `addressbook_type `. To instantiate a table, consider its two required arguments:
+Instantiate the table. Earlier, a multi_index table was configured as `typedef addressbook_type`. To instantiate this table, consider its two required arguments:
 
-* The `"code"`, which represents the contract's account. This value is accessible through the scoped `_code` variable.
-* The `"scope"` which make sure the uniqueness of the contract. In this case, since we only have one table we can use `"_code"` as well. Important to notice, we are passing `_code.value` that returns `_code` in `unit64_t` as that is what `scope` requires.
+* The `"code"`, which represents the contract's account. This value is accessible through the scoped `_code` variable, it can be thought of as "self". 
+* The `"scope"` which declares the account to which the data in this range belongs. In this case, since we only have one table we can use `"_code"` as well. Important to notice, we are passing `_code.value` that returns `_code` in `unit64_t` as that is what `scope` requires.
 
 ```cpp
 void upsert(name user, std::string full_name, std::string street, std::string city, uint32_t phone) {
@@ -597,7 +649,7 @@ void upsert(name user, std::string full_name, std::string street, std::string ci
 }
 ```
 
-Next, query the iterator, setting it to a variable since this iterator will be used several times.
+Next, query the iterator and setting it to a variable (iterator) since this iterator may be used several times.
 
 ```cpp
 void upsert(name user, std::string full_name, std::string street, std::string city, uint32_t phone) {
@@ -622,7 +674,7 @@ if( iterator == addresses.end() )
   }
 ```
 
-If the record doesn't exist, we need to create it. We will use an `emplace` method to do it:
+If the record doesn't exist, we need to create it, to do this use the `emplace` function:
 
 ```cpp
 addresses.emplace(user, [&]( auto& row ) {
@@ -634,7 +686,7 @@ addresses.emplace(user, [&]( auto& row ) {
 });
 ```
 
-If it already exists - we will update it using `modify` method:
+If it already exists - we will update it using `modify` function:
 
 ```cpp
 addresses.modify(iterator, user, [&]( auto& row ) {
@@ -708,7 +760,7 @@ class addressbook : public eosio::contract
 
 ```
 
-We also may want to add the `erase` method. Please remember it doesn't remove the record from the history, but removes it from the current state of the database, freeing resources if you are on a resource-limited network.
+We also may want to add the `erase` method. Please remember it doesn't remove the record from the history. However, it does remove it from the current state of the database, freeing resources if you are on a resource-limited network. Presently, you are on a single-node local testnet that has not resource-limitations imposed. 
 
 ```cpp
 void erase(name user) {
@@ -722,9 +774,9 @@ void erase(name user) {
 
 The contract is now mostly complete. Users can create, modify and erase records. However, the contract is not quite ready to be compiled.
 
-At the bottom of the file, utilize the `EOSIO_DISPATCH` macro, passing the name of the contract, and our lone action "upsert".
+At the bottom of the file, utilize the `EOSIO_DISPATCH` macro, passing the name of the contract, and our actions `upsert` and `erase`.
 
-This macro handles the apply handlers used by wasm to dispatch calls to specific methods in our contract.
+This macro handles the apply handlers used by wasm to dispatch calls to specific actions in our contract.
 
 Adding the following to the bottom of `addressbook.cpp` will make our `cpp` file compatible with EOSIO's wasm interpreter. Failing to include this declaration may result in an error when deploying the contract.
 
@@ -814,24 +866,18 @@ private:
 EOSIO_DISPATCH( addressbook, (upsert)(erase))
 ```
 
-Awesome, we have our table! Let's test it now.
+We have our table, let's test it now. First, we need to create couple of accounts:
 
-First, we need to create couple of accounts:
+Create a user account so we can test adding contact details to the address book. Replace `PUBLICKEY` with the public key you set aside earlier. 
 
 ```bash
-# This account will be a user who wants to add their contact details to the address book
-cleos create key --to-console
-cleos create key --to-console
-cleos wallet import --private-key **PRIVATEKEY1**
-cleos wallet import --private-key **PRIVATEKEY2**
-cleos create account eosio khaled **PUBLICKEY1** **PUBLICKEY2**
+cleos create account eosio khaled PUBLICKEY
+```
 
-# This account will be used to store the smart contract for the address book
-cleos create key --to-console
-cleos create key --to-console
-cleos wallet import --private-key **PRIVATEKEY3**
-cleos wallet import --private-key **PRIVATEKEY4**
-cleos create account eosio addressbook **PUBLICKEY3** **PUBLICKEY4**
+Create another account, this one will be used to store the smart contract for the address book
+
+```bash
+cleos create account eosio addressbook PUBLICKEY
 ```
 
 Now we need to compile and upload the smart contract:
@@ -892,5 +938,3 @@ You should get the following result by repeating the last cleos command:
   "more": false
 }
 ```
-
-Congrats, all done! 

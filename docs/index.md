@@ -6,8 +6,8 @@ You may or may not require some preconfiguration of your machine before the Bloc
 
 ## Mac OS X or Linux
 
-You're good to go! :100: 
+You're good to go!
 
 ## Windows
 
-If the machine you are bringing to the Bootcamp is Windows, please click here and [follow the guides](windows.md). 
+Please click here and closely [follow the guides](windows.md). 

@@ -1,5 +1,7 @@
 # Windows
 
+There are two different compatible environments for windows users, which environment you'll be using depends on the version of Windows you have installed. Please carefully follow the instructions to understand how to proceed. 
+
 ## Windows 8 or Lesser
 
 [Click here](virtual-machine.md) to continue
@@ -20,4 +22,4 @@
 
 [Click here](virtual-machine.md)
 
-There are two different compatible environments for windows users, which environment you'll be using from. 
+

@@ -1,5 +1,5 @@
 ## Install Windows Subsystem for Linux
-Follow steps to install Windows Subsystem for Linux [found here](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+Follow steps to install Windows Subsystem for Linux <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" target="_blank">found here</a>
 
 ## Download Ubuntu 18.04
 - Open *Microsoft Store*

@@ -231,8 +231,7 @@ We can view that this process was success executed by calling the following.
 cleos get account helloworld -j
 ```
 
-You'll no recieve a response that outlines the account's details. 
-
+You'll now recieve a response that outlines the account's details.
 
 # "Hello World" Smart Contract
 

@@ -755,6 +755,8 @@ class addressbook : public eosio::contract
 
     typedef eosio::multi_index<"people"_n, person> addressbook_type;
 
+};
+
 ```
 
 We also may want to add the `erase` method. Please remember it doesn't remove the record from the history. However, it does remove it from the current state of the database, freeing resources if you are on a resource-limited network. Presently, you are on a single-node local testnet that has not resource-limitations imposed. 

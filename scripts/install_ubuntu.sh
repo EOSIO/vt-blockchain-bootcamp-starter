@@ -15,7 +15,7 @@ apt install -y nodejs
 
 # Get Binary Packages Information
 UBUNTU_VERSION=$(lsb_release --release | cut -f2)
-if [ $UBUNTU_VERSION="18.04" ]; then
+if [ "18.04" -eq "$UBUNTU_VERSION" ]; then
   EOSIO_DOWNLOAD_URL=$(curl --silent "https://api.github.com/repos/EOSIO/eos/releases/latest" | grep "browser_download_url.*ubuntu-18.04_amd64.deb" | cut -d ":" -f 2,3 | tr -d \")
 else
   EOSIO_DOWNLOAD_URL=$(curl --silent "https://api.github.com/repos/EOSIO/eos/releases/latest" | grep "browser_download_url.*ubuntu-16.04_amd64.deb" | cut -d ":" -f 2,3 | tr -d \")

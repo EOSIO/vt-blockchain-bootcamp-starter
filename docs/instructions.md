@@ -106,8 +106,6 @@ cd ~/VTBootCamp/vt-blockchain-bootcamp-starter
 ```
 After a short setup process your browser should automatically open a new tab on `http://localhost:3000/`
 
-You should now have two terminal windows that will provide the luxury 
-
 ![NoteChain GUI](https://i.imgur.com/Czvlqss.png)
 
 The lower-half of the interface contains *accounts, public keys and private keys* for users that were created when you ran the first time setup bash script in a previous step.

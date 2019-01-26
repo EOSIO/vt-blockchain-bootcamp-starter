@@ -34,7 +34,6 @@ then
     select yn in "Yes" "No"; do
         case "${yn}" in
             [Yy]* )
-            "${XCODESELECT}" --install 2>/dev/null;
             if ! "${RUBY}" -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
             then
                 echo "Unable to install homebrew at this time. Exiting now."

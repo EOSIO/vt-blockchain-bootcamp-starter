@@ -371,7 +371,7 @@ Change directories...
 cd eosio.contracts/eosio.token
 ```
 
-First, we need to create an account for the contract. Earlier, you copy and pasted a public key that you generated somewhere. Go get that public key now, and replaced `PUBLICKEY` below. If you cannot find it, no worries, just use `cleos wallet list` to list show your public keys. 
+First, we need to create an account for the contract. Earlier, you copy and pasted a public key that you generated somewhere. Go get that public key now, and replaced `PUBLICKEY` below. If you cannot find it, no worries, just use `cleos wallet list` to list your public keys. 
 
 ```bash
 cleos create account eosio eosio.token PUBLICKEY

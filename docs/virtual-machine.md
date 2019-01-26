@@ -111,3 +111,7 @@ Installation will begin, the VM will restart and boot up.
 - Enter the Ubuntu password you chose during the installation process. 
 - Press enter
 - wait for installation to complete.
+
+# Complete
+
+Now that you're finished setting up an Ubuntu VM, [Continue](instructions.md)

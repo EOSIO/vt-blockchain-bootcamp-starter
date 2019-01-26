@@ -582,11 +582,9 @@ Now that the data structure of the table has been defined with a struct we need 
 typedef eosio::multi_index<"people"_n, person> addressbook_type;
 ```
 
-We need to initialize the class in the constructor.
+We need to initialize the class in the constructor and pass the name as a parameter in the constructor. This name will be set to the account that deploys the contract
 
 ```cpp
-// We inititialize the class with a constructor and we pass the name as a parameter in the constructor
-// this name will be set to the account that deploys the contract
 addressbook(name receiver, name code,  datastream<const char*> ds):contract(receiver, code, ds) {}
 ```
 
@@ -600,6 +598,7 @@ class addressbook : public eosio::contract
 {
   public:
     using contract::contract;
+    
     addressbook(name receiver, name code, datastream<const char *> ds) : contract(receiver, code, ds) {}
 
   private:

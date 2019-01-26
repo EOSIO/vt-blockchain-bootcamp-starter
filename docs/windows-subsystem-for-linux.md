@@ -16,3 +16,6 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 # Configure Ubuntu 18.04 on WSL
 7. Launch **Ubuntu 18.04** Windows Application
 8. Configure your username and password.
+
+# Complete
+Now that you've installed WSL, [Continue](instructions.md)

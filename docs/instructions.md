@@ -377,30 +377,31 @@ First, we need to create an account for the contract. Earlier, you copy and past
 cleos create account eosio eosio.token PUBLICKEY
 ```
 
-Next we need to compile the eosio.token contract. Enter the following in your terminal
+Next we need to compile the `eosio.token` contract. Enter the following in your terminal
+
 ```bash
 eosio-cpp -I include -o eosio.token.wasm src/eosio.token.cpp --abigen
 ```
 
-Then we need to upload the smart contract:
+_If you're curious about the parameters used for `eosio.cdt` you can use `eosio-cpp -help` or view it's [reference documentation](https://eosio.github.io/eosio.cdt/1.5.0/tools/eosio-cpp.html) 
+
+Then we need to deploy the `eosio.token` smart contract:
 
 ```bash
 cleos set contract eosio.token ~/VTBootCamp/eosio.contracts/eosio.token -p eosio.token
 ```
 
-Once that done, we can issue new token:
+Once that is complete, issue the a token. We're going to call this token "SYS" 
 
 ```bash
 cleos push action eosio.token create '{"issuer":"eosio", "maximum_supply":"1000000000.0000 SYS"}' -p eosio.token@active
 ```
 
-This command created a new token `SYS` with a precision of 4 decimals and a maximum supply of `1000000000.0000 SYS`. For this reason we must pass `-p eosio.token` to authorize this call.
+This command created a new token `SYS` with a precision of 4 decimals and a maximum supply of `1000000000.0000 SYS`. We pass `-p eosio.token@active` to inform `cleos` to tell `keosd` to sign the transaction using a key that authorizes with the `active` permission of the `eosio.token` account.
 
 ## Issue Tokens to Account "helloworld"
 
 Now that we have created the token, the issuer (eosio) can issue new tokens to the account user we created earlier.
-
-We will use the positional calling convention (vs named args).
 
 ```
 cleos push action eosio.token issue '[ "helloworld", "100.0000 SYS", "memo" ]' -p eosio@active
@@ -410,7 +411,7 @@ This time the output contains several different actions: one issue and three tra
 
 Technically, the eosio.token contract could have skipped the inline transfer and opted to just modify the balances directly. However, in this case, the eosio.token contract is following the token convention that requires that all account balances be derivable by the sum of the transfer actions that reference them. It also requires that the sender and receiver of funds be notified so they can automate handling deposits and withdrawals.
 
-Let's check `helloworld`'s balance:
+Check `helloworld`'s balance now:
 
 ```bash
 cleos get table eosio.token helloworld accounts

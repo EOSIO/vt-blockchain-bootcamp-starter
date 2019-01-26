@@ -108,7 +108,7 @@ After a short setup process your browser should automatically open a new tab on 
 
 ![NoteChain GUI](https://i.imgur.com/Czvlqss.png)
 
-The lower-half of the interface contains *accounts, public keys and private keys* for users that were created when you ran the first time setup bash script in a previous step.
+The lower-half of the interface contains *accounts, public keys and private keys* for users that were created when you ran the `first_time_setup.sh` script in a previous step.
 
 Copy one of the example account's information into the UI of the NoteChain application.
 

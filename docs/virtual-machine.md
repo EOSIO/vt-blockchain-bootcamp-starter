@@ -14,7 +14,7 @@ Download from [virtualbox.com](https://www.virtualbox.org/wiki/Downloads) or [cl
 
 ### Ubuntu
 
-Download the Ubuntu 18.04.1 LTS ISO from Ubuntu or [click here](https://www.ubuntu.com/download/desktop/thank-you?country=US&version=18.04.1&architecture=amd64)
+Download the Ubuntu 18.04.1 LTS ISO from [Ubuntu.com](https://www.ubuntu.com/download/desktop/thank-you?country=US&version=18.04.1&architecture=amd64)
 
 ## Setup Virtual Box
 

@@ -1,6 +1,6 @@
 ## Preparation
 
-You may or may not require some preconfiguration of your machine before following the guided lesson Blockchain Bootcamp. We will be using the EOSIO blockchain during the bootcamp and EOSIO requires either Linux, Mac OS X or Windows Subsystem for Linux (WSL).
+You may or may not require some preconfiguration of your machine before following the guided lesson at Blockchain Bootcamp. We will be using the EOSIO blockchain during the bootcamp and EOSIO requires either Linux, Mac OS X, a Virtual Machine or Windows Subsystem for Linux (WSL).
 
 ## Step 1: Prepare Your Machine
 

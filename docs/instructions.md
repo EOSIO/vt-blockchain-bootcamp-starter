@@ -159,7 +159,11 @@ Next create a key in your wallet.
 cleos wallet create_key
 Created new private key with a public key of: "EOS74GhNdMRYtej..."
 ```
-Your key is now imported into the wallet. We will be using this key a few more times throughout the guide, so copy it somewhere easy to access. 
+Your key is now imported into the wallet. We will be using this key a few more times throughout the guide, so copy it somewhere easy to access. For convenience, store it as a variable:
+
+```bash
+PUBLICKEY="the-public-key-from-above"
+```
 
 ```bash
 cleos wallet list
@@ -211,10 +215,10 @@ You'll be presented with a password prompt, copy the key below and paste it into
 
 Now lets create some user accounts.
 
-To create a new account on your single-node testnet, use [cleos create account](https://developers.eos.io/eosio-cleos/reference#cleos-create-account) as demonstrated below. Replace *PUBLICKEY* with the key starting with *EOS* that you saved in the previous step.
+To create a new account on your single-node testnet, use [cleos create account](https://developers.eos.io/eosio-cleos/reference#cleos-create-account) as demonstrated below.
 
 ```bash
-cleos create account eosio helloworld PUBLICKEY -p eosio@active
+cleos create account eosio helloworld $PUBLICKEY -p eosio@active
 ```
 
 Let's explore what just happened in the interaction between cleos (your CLI client) and keosd (the wallet process)
@@ -371,10 +375,10 @@ Change directories...
 cd eosio.contracts/eosio.token
 ```
 
-First, we need to create an account for the contract. Earlier, you copy and pasted a public key that you generated somewhere. Go get that public key now, and replaced `PUBLICKEY` below. If you cannot find it, no worries, just use `cleos wallet list` to list your public keys. 
+First, we need to create an account for the contract. Earlier, you created a variable named `PUBLICKEY` with the public key. We'll use that again. If you cannot find it, no worries, just use `cleos wallet list` to list your public keys. 
 
 ```bash
-cleos create account eosio eosio.token PUBLICKEY
+cleos create account eosio eosio.token $PUBLICKEY
 ```
 
 Next we need to compile the `eosio.token` contract. Enter the following in your terminal
@@ -867,16 +871,16 @@ EOSIO_DISPATCH( addressbook, (upsert)(erase))
 
 We have our table, let's test it now. First, we need to create couple of accounts:
 
-Create a user account so we can test adding contact details to the address book. Replace `PUBLICKEY` with the public key you set aside earlier. 
+Create a user account so we can test adding contact details to the address book. 
 
 ```bash
-cleos create account eosio josh PUBLICKEY
+cleos create account eosio josh $PUBLICKEY
 ```
 
 Create another account, this one will be used to store the smart contract for the address book
 
 ```bash
-cleos create account eosio addressbook PUBLICKEY
+cleos create account eosio addressbook $PUBLICKEY
 ```
 
 Now we need to compile the smart contract:

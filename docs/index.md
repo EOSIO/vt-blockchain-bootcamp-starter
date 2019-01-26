@@ -14,4 +14,4 @@ Please [follow the Windows Preparation Guide](windows.md).
 
 ## Step 2: Guided Lesson
 
-We have prepared a document for you to follow along with during our guided instruction. [Click here to access](instructions.md)
+We have prepared a document for you that will assist with your development, [click here to access](instructions.md)

@@ -383,7 +383,7 @@ Next we need to compile the `eosio.token` contract. Enter the following in your 
 eosio-cpp -I include -o eosio.token.wasm src/eosio.token.cpp --abigen
 ```
 
-_If you're curious about the parameters used for `eosio.cdt` you can use `eosio-cpp -help` or view it's [reference documentation](https://eosio.github.io/eosio.cdt/1.5.0/tools/eosio-cpp.html) 
+_If you're curious about the parameters used for `eosio.cdt` you can use `eosio-cpp -help` or view the `eosio-cpp` [reference documentation](https://eosio.github.io/eosio.cdt/1.5.0/tools/eosio-cpp.html)_
 
 Then we need to deploy the `eosio.token` smart contract:
 

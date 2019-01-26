@@ -18,13 +18,13 @@ Download the Ubuntu 18.04.1 LTS ISO from [Ubuntu.com](https://www.ubuntu.com/dow
 
 ## Setup Virtual Box
 
-### Create new VM
+### 1 Create new VM
 
-#### Create new Virtual Machine
+#### 1.1 Create new Virtual Machine
 
 Click the blue "New" button at the top of VirtualBox Manager, the following dialog will appear.
 
-##### Enter details
+##### 1.1.2 Enter details
 
 - Name the VM: "Ubuntu VM"
 - You can leave the machine folder as default, or enter a custom path if desired. 
@@ -33,35 +33,45 @@ Click the blue "New" button at the top of VirtualBox Manager, the following dial
 
 ![](https://cdn.pbrd.co/images/HXZyTAY.png)
 
-#### Specify memory size
+#### 1.2 Specify memory size
 
 It's suggested to allocate at least 4gb of ram 
 
 ![](https://cdn.pbrd.co/images/HXZQuMi.jpg)
 
-#### Configure Hard Disk for VM
+#### 1.3 Configure Hard Disk for VM
+
+##### 1.3.1
 
 - Select "Create a Virtual Hard Disk Now" 
 - Click **Continue** 
 
 ![](https://cdn.pbrd.co/images/HXZR9RO.jpg)
 
+##### 1.3.2
+
 - Select VDI (VirtualBox Disk Image)
 - Click **Continue**
 
 ![](https://cdn.pbrd.co/images/HXZRBFJ.jpg)
+
+##### 1.3.3
 
 - Select "Dynamically Allocated"
 - Click **Continue**
 
 ![](https://cdn.pbrd.co/images/HXZS3Ot.jpg)
 
+##### 1.3.4
+
 - Select at least 25GB with the slider
 - Click **Create**
 
 ![](https://cdn.pbrd.co/images/HXZSdP8.jpg)
 
-#### Select CPU Cores
+##### 1.3.5
+
+#### 1.4 Select CPU Cores
 - Click System
 - Select at least 2 cores, if you select less than 2 cores, you may experience issues when compiling smart contracts. 
 - Leave execution cap at 100%. 
@@ -69,7 +79,7 @@ It's suggested to allocate at least 4gb of ram
 
 ![](https://cdn.pbrd.co/images/HXZSkhJ.jpg)
 
-#### Mount ISO Image
+#### 1.5 Mount ISO Image
 
 - Click "Storage" in menu bar
 - In the Storage Devices section on the left, select "Empty" under "Controller: IDE." 
@@ -84,17 +94,21 @@ You're now done setting up the Ubuntu VM.
 
 
 
-## Install Ubuntu
+## 2 Install Ubuntu
 
-### Boot VM
+### 2.1 Boot VM
 - Select the VM you just created in VirtualBox Manager
 - Click the green "Start" button
 
 Ubuntu 18.04.1 will boot.
 
+#### 2.1.1
+
 Select your language and click "Install Ubuntu"
 
 ![](https://cdn.pbrd.co/images/HXZSClc.jpg)
+
+#### 2.1.2
 
 For the next screens, use default settings and click **next** until you arrive at the "Who are you?" step. 
 
@@ -104,9 +118,9 @@ When you're there, fill out your details and click **Continue**
 
 Installation will begin, the VM will restart and boot up.
 
-## Install Git
+## 3 Install Git
 
-- Open the application called "Terminal"
+- Open the application called "Terminal" **inside your Ubuntu VM**
 - Enter `sudo apt -y install git` 
 - Enter the Ubuntu password you chose during the installation process. 
 - Press enter

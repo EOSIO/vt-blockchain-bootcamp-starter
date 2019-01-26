@@ -318,7 +318,7 @@ EOSIO_DISPATCH( helloworld, (hi))
 
 ## eosio.cdt
 
-eosio.cdt is a toolchain for WebAssembly (WASM) and set of tools to facilitate contract writing and compilation for the EOSIO platform. We installed `eosio.cdt` for you when you ran the `first_time_setup.sh`, you can 
+eosio.cdt is a toolchain for WebAssembly (WASM) and set of tools to facilitate contract writing and compilation for the EOSIO platform. We installed `eosio.cdt` for you when you ran the `first_time_setup.sh` script.
 
 ## Compile the smart contract
 

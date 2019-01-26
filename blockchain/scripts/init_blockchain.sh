@@ -9,6 +9,18 @@ fi
 # Make Data Directory
 mkdir -p "${SOURCE_DIR}/blockchain/data"
 
+curl --output /dev/null \
+    --silent \
+    --head \
+    --fail \
+    localhost:8888
+
+retval=$?
+if [ $retval == 0 ]; then
+    echo "You have a process already using port 8888, which is preventing nodeos from starting"
+    exit 1
+fi
+
 # Start Nodeos
 nodeos -e -p eosio -d "${SOURCE_DIR}/blockchain/data" \
     --config-dir "${SOURCE_DIR}/blockchain/data/config" \

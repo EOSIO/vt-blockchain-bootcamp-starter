@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -o errexit
 
 SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )"
 
@@ -10,6 +9,21 @@ then
 fi
 
 # this file is used to continue the stopped blockchain
+
+# Check for port conflicts
+curl --output /dev/null \
+    --silent \
+    --head \
+    --fail \
+    localhost:8888
+
+retval=$?
+if [ $retval == 0 ]; then
+    echo "You have a process already using port 8888, which is preventing nodeos from starting"
+    exit 1
+fi
+
+set -o errexit
 
 echo "=== continuing existing blockchain ==="
 

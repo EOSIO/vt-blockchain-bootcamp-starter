@@ -1,9 +1,18 @@
+SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )"
+
+if [ ! -e "${SOURCE_DIR}/first_time_setup.sh" ]
+then
+   printf "\n\tScript moved from blockchain/scripts directory.\n\n"
+   exit -1
+fi
+
 # Make Data Directory
-mkdir -p "$(pwd)/blockchain/data"
+mkdir -p "${SOURCE_DIR}/blockchain/data"
 
 # Start Nodeos
-nodeos -e -p eosio -d "$(pwd)/blockchain/data" \
-    --config-dir "$(pwd)/blockchain/data/config" \
+nodeos -e -p eosio -d "${SOURCE_DIR}/blockchain/data" \
+    --config-dir "${SOURCE_DIR}/blockchain/data/config" \
+    --delete-all-blocks \
     --http-validate-host=false \
     --plugin eosio::chain_plugin \
     --plugin eosio::producer_plugin \
@@ -12,7 +21,7 @@ nodeos -e -p eosio -d "$(pwd)/blockchain/data" \
     --http-server-address=0.0.0.0:8888 \
     --access-control-allow-origin=* \
     --contracts-console \
-    --verbose-http-errors > "$(pwd)/blockchain/data/nodeos.log" 2>&1 </dev/null &
+    --verbose-http-errors > "${SOURCE_DIR}/blockchain/data/nodeos.log" 2>&1 </dev/null &
 
 until $(curl --output /dev/null \
             --silent \
@@ -30,12 +39,20 @@ echo "EOSIO Blockchain Started"
 sleep 2s
 echo "=== setup wallet: eosiomain ==="
 # First key import is for eosio system account
-cleos wallet create -n eosiomain --to-console | tail -1 | sed -e 's/^"//' -e 's/"$//' > "$(pwd)/blockchain/data/eosiomain_wallet_password.txt"
+if [ -e ~/eosio-wallet/eosiomain.wallet ]
+then
+   rm ~/eosio-wallet/eosiomain.wallet
+fi
+cleos wallet create -n eosiomain --to-console | tail -1 | sed -e 's/^"//' -e 's/"$//' > "${SOURCE_DIR}/blockchain/data/eosiomain_wallet_password.txt"
 cleos wallet import -n eosiomain --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
 
 echo "=== setup wallet: notechainwal ==="
 # key for eosio account and export the generated password to a file for unlocking wallet later
-cleos wallet create -n notechainwal --to-console | tail -1 | sed -e 's/^"//' -e 's/"$//' > "$(pwd)/blockchain/data/notechain_wallet_password.txt"
+if [ -e ~/eosio-wallet/notechainwal.wallet ]
+then
+   rm ~/eosio-wallet/notechainwal.wallet
+fi
+cleos wallet create -n notechainwal --to-console | tail -1 | sed -e 's/^"//' -e 's/"$//' > "${SOURCE_DIR}/blockchain/data/notechain_wallet_password.txt"
 # Owner key for notechainwal wallet
 cleos wallet import -n notechainwal --private-key 5JpWT4ehouB2FF9aCfdfnZ5AwbQbTtHBAwebRXt94FmjyhXwL4K
 # Active key for notechainwal wallet
@@ -53,16 +70,16 @@ echo "=== deploy smart contract ==="
 # $2 account holder name of the smart contract
 # $3 wallet for unlock the account
 # $4 password for unlocking the wallet
-$(pwd)/blockchain/scripts/deploy_contract.sh notechain notechainacc notechainwal $(cat ./blockchain/data/notechain_wallet_password.txt)
+${SOURCE_DIR}/blockchain/scripts/deploy_contract.sh notechain notechainacc notechainwal $(cat "${SOURCE_DIR}/blockchain/data/notechain_wallet_password.txt")
 
 echo "=== create user accounts ==="
 # script for create data into blockchain
-$(pwd)/blockchain/scripts/create_accounts.sh
+${SOURCE_DIR}/blockchain/scripts/create_accounts.sh
 
 # * Replace the script with different form of data that you would pushed into the blockchain when you start your own project
 
 echo "=== end of setup blockchain accounts and smart contract ==="
 # create a file to indicate the blockchain has been initialized
-touch "$(pwd)/blockchain/data/initialized"
+touch "${SOURCE_DIR}/blockchain/data/initialized"
 
-tail -f "$(pwd)/blockchain/data/nodeos.log"
+tail -f "${SOURCE_DIR}/blockchain/data/nodeos.log"

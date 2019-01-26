@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -o errexit
 
+SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 function removeDeps {
     echo "=== removing binary packages ==="
     ARCH=$( uname )
@@ -55,12 +57,12 @@ echo "Wallet has been reset."
 
 echo "=== removing blockchain data ==="
 
-rm -rf "$(pwd)/blockchain/data" || true
+rm -rf "${SOURCE_DIR}/blockchain/data" || true
 
 echo "=== removing frontend node modules ==="
 
-rm -rf "$(pwd)/frontend/node_modules" || true
-rm "$(pwd)/frontend/package-lock.json" || true
+rm -rf "${SOURCE_DIR}/frontend/node_modules" || true
+rm "${SOURCE_DIR}/frontend/package-lock.json" || true
 
 echo "Would you like to remove the binary packages that were installed?"
 select yn in "Yes" "No"; do

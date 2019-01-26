@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 set -o errexit
 
-CONTRACTSPATH="$( pwd -P )/blockchain/contracts"
+SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd -P )"
+
+if [ ! -e "${SOURCE_DIR}/first_time_setup.sh" ]
+then
+   printf "\n\tScript moved from blockchain/scripts directory.\n\n"
+   exit -1
+fi
+
+CONTRACTSPATH="${SOURCE_DIR}/blockchain/contracts"
 
 # make new directory for compiled contract files
-mkdir -p ./blockchain/compiled_contracts
-mkdir -p ./blockchain/compiled_contracts/$1
+mkdir -p "${SOURCE_DIR}/blockchain/compiled_contracts/$1"
 
-COMPILEDCONTRACTSPATH="$( pwd -P )/blockchain/compiled_contracts"
+COMPILEDCONTRACTSPATH="${SOURCE_DIR}/blockchain/compiled_contracts"
 
 # unlock the wallet, ignore error if already unlocked
 if [ ! -z $3 ]; then cleos wallet unlock -n $3 --password $4 || true; fi

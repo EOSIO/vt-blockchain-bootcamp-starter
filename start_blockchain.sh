@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -o errexit
 
-if [ -e "$(pwd)/blockchain/data/initialized" ]
+SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [ -e "${SOURCE_DIR}/blockchain/data/initialized" ]
 then
-    "$(pwd)/blockchain/scripts/continue_blockchain.sh"
+    "${SOURCE_DIR}/blockchain/scripts/continue_blockchain.sh"
 else
-    "$(pwd)/blockchain/scripts/init_blockchain.sh"
+    "${SOURCE_DIR}/blockchain/scripts/init_blockchain.sh"
 fi

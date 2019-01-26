@@ -12,9 +12,9 @@ Please open your "Terminal" now.
 
 ## C++ coding environment setup
 
-We can use any text editor that, preferrably, supports c++ highlighting. If you already have an editor/IDE that you are familiar and comfortable with, please use it.
+We can use any text editor that, preferably, supports C++ highlighting. If you already have an editor/IDE that you are familiar and comfortable with, please use it.
 
-However, if you do not presently have an Editor, we suggest downloading [VS Code](), it's free, simple to use and works well with C++ development. 
+However, if you do not presently have an Editor, we suggest downloading [VS Code](https://code.visualstudio.com/), it's free, simple to use and works well with C++ development. 
 
 **Remember: If you're using Ubuntu from a VirtualBox Virtual Machine, download your editor from _inside the VM_**
 
@@ -33,7 +33,7 @@ ln -s /mnt/c/VTBootCamp
 cd ~/VTBootCamp
 ```
 
-Some instructions below will ask you to create and modify files. You can either use a terminal based editor (vim, nano, etc) within the Ubuntu 18.04 terminal, or you can use a gui based editor within Windows. All the files can be found at `C:\VTBootCamp`. You may edit them there, and then resume the tutorial in the Ubuntu 18.04 terminal.
+Some instructions below will ask you to create and modify files. You can either use a terminal based editor (vim, nano, etc) within the Ubuntu 18.04 terminal, or you can use a GUI based editor within Windows. All the files can be found at `C:\VTBootCamp`. You may edit them there, and then resume the tutorial in the Ubuntu 18.04 terminal.
 
 ## MacOS and Ubuntu 18.04 ##
 
@@ -43,7 +43,7 @@ Enter the following into terminal
 mkdir ~/VTBootCamp
 ```
 
-To create the *VTBootCamp* directory in your home directory. 
+to create the *VTBootCamp* directory in your home directory. 
 
 Change to the home directory.
 
@@ -55,7 +55,7 @@ cd ~/VTBootCamp
 
 ## Download VT Blockchain Bootcamp Starter Kit 
 
-The starter kit repository contains an example contract, a frontend that exposes the functionality of the contract and some convenience scripts for managing the blockchain. For more information about the starter kit, see the [Github Repo](https://github.com/EOSIO/vt-blockchain-bootcamp-starter)
+The starter kit repository contains an example contract, a frontend that exposes the functionality of the contract and some convenience scripts for managing the blockchain. For more information about the starter kit, see the [GitHub Repo](https://github.com/EOSIO/vt-blockchain-bootcamp-starter).
 
 ```bash
 cd ~/VTBootCamp
@@ -65,7 +65,7 @@ cd vt-blockchain-bootcamp-starter
 
 ## First Time Setup
 
-To install EOSIO binaries and their dependencies run the `first_time_setup.sh` script located in the `vt-blockchain-bootcamp-starter` directory
+To install EOSIO binaries and their dependencies run the `first_time_setup.sh` script located in the `vt-blockchain-bootcamp-starter` directory.
 
 ### If on Mac OS X
 
@@ -82,7 +82,7 @@ Enter your system password when the password prompt appears.
 
 ## Start the Blockchain
 
-Next, start the blockchain
+Next, start the blockchain.
 
 ```bash
 ./start_blockchain.sh
@@ -108,7 +108,7 @@ After a short setup process your browser should automatically open a new tab on 
 
 ![NoteChain GUI](https://i.imgur.com/Czvlqss.png)
 
-The lower-half of the interface contains *accounts, public keys and private keys* for users that were created when you ran the `first_time_setup.sh` script in a previous step.
+The lower-half of the interface contains *accounts, public keys and private keys* for users that were created when you ran the `start_blockchain.sh` script for the first time.
 
 Copy one of the example account's information into the UI of the NoteChain application.
 
@@ -126,7 +126,7 @@ cd ~/VTBootCamp
 
 `cleos` is a _command line interface_ (CLI) to interact with the blockchain and to manage wallets.
 
-Execute `cleos --help` in your terminal to get a top-level help text. You can also just call `cleos` or `cleos subcomand` without any parameters to output help text. For example `cleos wallet`, will output help text in the context of `wallet` 
+Execute `cleos --help` in your terminal to get a top-level help text. You can also just call `cleos` or `cleos subcomand` without any parameters to output help text. For example, `cleos wallet` will output help text in the context of the `wallet`.
 
 If you would like to view the command reference for `cleos`, you can find it here: [https://developers.eos.io/eosio-cleos/reference](https://developers.eos.io/eosio-cleos/reference). 
 
@@ -144,7 +144,7 @@ cleos wallet create --to-console
 
 The output of this command will give you a password. *Save this password* - you will need it throughout the remainder of this guide. 
 
-To work with a wallet, it first opened and unlock it.
+To work with a wallet, first open and unlock it.
 
 ```bash
 cleos wallet open
@@ -179,10 +179,10 @@ Wallets:
 The `*` shows which wallets are open.
 
 ```bash
-cleos wallet list keys
+cleos wallet keys
 ```
 
-This will output your `public key` 
+This will output your public keys:
 
 ```
 [
@@ -209,7 +209,7 @@ You'll be presented with a password prompt, copy the key below and paste it into
 
 ## User account
 
-Now lets create some user accounts.
+Now let's create some user accounts.
 
 To create a new account on your single-node testnet, use [cleos create account](https://developers.eos.io/eosio-cleos/reference#cleos-create-account) as demonstrated below. Replace *PUBLICKEY* with the key starting with *EOS* that you saved in the previous step.
 
@@ -217,13 +217,13 @@ To create a new account on your single-node testnet, use [cleos create account](
 cleos create account eosio helloworld PUBLICKEY -p eosio@active
 ```
 
-Let's explore what just happened in the interaction between cleos (your CLI client) and keosd (the wallet process)
+Let's explore what just happened in the interaction between cleos (your CLI client) and keosd (the wallet process):
 
-- `cleos create account` created a transaction that includes an action called "createaccount" which instructs the blockchain to *create an account* by the *eosio* account named *helloworld* with the same *PUBLICKEY* assigned to both the *owner* and *active* permission of the account. 
+- `cleos create account` created a transaction that includes an action called `newaccount` which instructs the blockchain to *create an account* by the `eosio` account named `helloworld` with the same *PUBLICKEY* assigned to both the *owner* and *active* permission of the account. 
 - cleos passes this created transaction to keosd to be signed, along with some extra data. 
 - The `-p eosio@active` part at the end of the command instructs cleos to explicitly ask keosd (again, the wallet process) to search for a key that fulfills the authorization requirements for the `active` permission  of the `eosio` account. 
-- We imported the eosio account's key earlier in this guide. So when keosd has confirmed this, keosd signs the provided transaction without exposing the private keys and returns the signed transaction to cleos.
-- Cleos then broadcasts the signed transaction to the blockchain. 
+- We imported the `eosio` account's key earlier in this guide. So when keosd has confirmed this, keosd signs the provided transaction without exposing the private keys and returns the signed transaction to cleos.
+- cleos then broadcasts the signed transaction to the blockchain. 
 
 We can view that this process was success executed by calling the following. 
 
@@ -235,7 +235,7 @@ You'll now recieve a response that outlines the account's details.
 
 # "Hello World" Smart Contract
 
-This first contract is extremely simple. It contains a single action that accepts a single parameter as an argument. The argument is used to print out a message in the log on nodeos process. Your nodeos process was started when you executed `start_blockchain.sh` earlier in this guide. 
+This first contract is extremely simple. It contains a single action that accepts a single parameter as an argument. The argument is used to print out a message in the log of the nodeos process. Your nodeos process was started when you executed `start_blockchain.sh` earlier in this guide. 
 
 The `helloworld` contract is useless by design. It's primary purpose is to demonstrate the motions of authoring, compiling and deploying the contract to an EOSIO blockchain.
 
@@ -274,7 +274,7 @@ class [[eosio::contract]] helloworld : public contract {
 
       [[eosio::action]]
       void hi( name user ) {
-         print( "Hello, ", name{user});
+         print( "Hello, ", user);
       }
 };
 EOSIO_DISPATCH( helloworld, (hi))
@@ -305,7 +305,7 @@ This is a standard implementation of a contract structure that has one method ca
 
   [[eosio::action]]
   void hi( name user ) {
-     print( "Hello, ", name{user});
+     print( "Hello, ", user);
   }
 ```
 
@@ -322,7 +322,7 @@ eosio.cdt is a toolchain for WebAssembly (WASM) and set of tools to facilitate c
 
 ## Compile the smart contract
 
-First we need to generate a WASM file. A WASM file is a compiled smart contract ready to be uploded to EOSIO network.
+First we need to generate a WASM file. A WASM file is a compiled smart contract ready to be uploaded to EOSIO network.
 
 `eosio-cpp` is the WASM compiler and an ABI generator utility. Before uploading the smart contract to the network we will need to compile it from C++ to WASM.
 
@@ -344,7 +344,7 @@ helloworld.abi  # this is the ABI file - describes the interface of the smart co
 helloworld.wasm # this is the compiled WASM file
 ```
 
-Congratulations, You have created your first smart contract. Time to deploy this contract to the blockchain.
+Congratulations. You have created your first smart contract. Time to deploy this contract to the blockchain.
 
 ```bash
 cleos set contract helloworld ~/VTBootCamp/helloworld --permission helloworld@active
@@ -371,7 +371,7 @@ Change directories...
 cd eosio.contracts/eosio.token
 ```
 
-First, we need to create an account for the contract. Earlier, you copy and pasted a public key that you generated somewhere. Go get that public key now, and replaced `PUBLICKEY` below. If you cannot find it, no worries, just use `cleos wallet list` to list show your public keys. 
+First, we need to create an account for the contract. Earlier, you copy and pasted a public key that you generated somewhere. Go get that public key now, and replaced `PUBLICKEY` below. If you cannot find it, no worries, just use `cleos wallet keys` to list your public keys. 
 
 ```bash
 cleos create account eosio eosio.token PUBLICKEY
@@ -398,7 +398,7 @@ This command created a new token `HAK` with a precision of 4 decimals and a maxi
 
 ## Issue Tokens to Account "helloworld"
 
-Now that we have created the token, the issuer (eosio) can issue new tokens to the account user we created earlier.
+Now that we have created the token, the issuer (`eosio`) can issue new tokens to the user account we created earlier.
 
 We will use the positional calling convention (vs named args).
 
@@ -476,7 +476,7 @@ Now we want to store our information in a table-like structure, similar to a dat
 
 Let's imagine we are building an address book where users can add their social security number, age and name. 
 
-First, create a directory
+First, create a directory:
 
 ```bash
 cd ~/VTBootCamp
@@ -490,9 +490,9 @@ And create a new `.cpp` file:
 touch addressbook.cpp
 ```
 
-Now this file in your code editor.
+Now open this file in your code editor.
 
-Let's create a standard structure for a contract file:
+Let's create the standard structure for a contract within the file:
 
 ```cpp
 #include <eosiolib/eosio.hpp>
@@ -501,14 +501,14 @@ Let's create a standard structure for a contract file:
 using namespace eosio;
 
 class addressbook : public eosio::contract {
-  public:
+   public:
        
-  private: 
+   private: 
   
 };
 ```
 
-Before a table can be configured and instantiated, a struct that represents the data structure of the address book needs to be written. Since it's an address book, the table will contain people, so create a struct called "person"
+Before a table can be configured and instantiated, a struct that represents the data structure of the address book needs to be written. Since it's an address book, the table will contain people, so create a struct called `person` under the private section of the `addressbook` class.
 
 ```cpp
 struct person {};
@@ -516,11 +516,11 @@ struct person {};
 
 When defining the struct for a `multi_index` table, you will require a unique value to use as the primary key.
 
-For this contract, use a field called "key" with type name. This contract will have one unique entry per user, so this key will be a consistent and guaranteed unique value based on the user's name.
+For this contract, use a field called `key` with type `name`. This contract will have one unique entry per user, so this key will be a consistent and guaranteed unique value based on the user's name.
 
 ```cpp
 struct person {
-	name key;
+   name key;
 };
 ```
 
@@ -528,58 +528,60 @@ Since this contract is an address book it probably should store some relevant de
 
 ```cpp
 struct person {
-  name key;
-  std::string full_name;
-  std::string street;
-  std::string city;
-  uint32_t phone;
+   name        key;
+   std::string full_name;
+   std::string street;
+   std::string city;
+   uint32_t    phone;
 };
 ```
 
-The data structure for *person* is now complete. Next, define a `primary_key` member function, which will be used by `multi_index` iterator. Every multi_index struct requires a primary key. To accomplish this you simply create a member function called `primary_key()` and return a value, in this case, the `key` member function as defined in the struct.
+The data structure for `person` is now complete. Next, define a `primary_key` member function, which will be used by `multi_index` class. Every struct to be used with `multi_index` requires a primary key. To accomplish this you simply create a member function called `primary_key()` that returns a value of type `uint64_t`, in this case, the raw value representation of the `key` member field in the `person` struct.
 
 ```cpp
 struct person {
-  name key;
-  std::string full_name;
-  std::string street;
-  std::string city;
-  uint32_t phone;
+   name        key;
+   std::string full_name;
+   std::string street;
+   std::string city;
+   uint32_t    phone;
 
-  uint64_t primary_key() const { return key.value;}
+   uint64_t primary_key() const { return key.value; }
 };
 ```
 
-*Note: A table's data structure cannot be modified while it has data in it. If you need to make changes to a table's schema in any way, you first need to remove all its rows. Thus, it's important to design your multi_index data structures carefully*
+*Note: A table's data structure cannot be modified while it has data in it. If you need to make changes to a table's schema in any way, you first need to remove all its rows. Thus, it's important to design your `multi_index` data structures carefully.*
 
-Add the `struct` in the `private` namespace.
+The code thus far should look like the following:
 
 ```cpp
 #include <eosiolib/eosio.hpp>
 #include <eosiolib/print.hpp>
 
+using namespace eosio;
+
 class addressbook : public eosio::contract {
-   public:
-   	using contract::contract;
-       
-   private:
-   	struct person {
-		 name key;
-		 std::string full_name;
-		 std::string street;
-		 std::string city;
-		 uint32_t phone;
-		 
-		 uint64_t primary_key() const { return key.value;}
-	};
+public:
+   using contract::contract;
+    
+private:
+   struct person {
+      name        key;
+      std::string full_name;
+      std::string street;
+      std::string city;
+      uint32_t    phone;
+      
+      uint64_t primary_key() const { return key.value; }
+   };
 };
 ```
 
-Now that the data structure of the table has been defined with a struct we need to configure the table. The `eosio::multi_index` constructor needs to be named and configured to use the struct we previously defined.
+Now that the data structure of the table has been defined with a struct, we need to configure the table. The `eosio::multi_index` constructor needs to be named and configured to use the struct we previously defined. We use the name `people` to refer to the table. 
 
 ```cpp
-// We setup the table usin multi_index container:
-typedef eosio::multi_index<"people"_n, person> addressbook_type;
+// We setup the table using multi_index container:
+using addressbook_type = eosio::multi_index<"people"_n, person>;
 ```
 
 We need to initialize the class in the constructor.
@@ -587,7 +589,7 @@ We need to initialize the class in the constructor.
 ```cpp
 // We inititialize the class with a constructor and we pass the name as a parameter in the constructor
 // this name will be set to the account that deploys the contract
-addressbook(name receiver, name code,  datastream<const char*> ds):contract(receiver, code, ds) {}
+addressbook(name receiver, name code, eosio::datastream<const char*> ds) : contract(receiver, code, ds) {}
 ```
 
 Let's sum it all up in one file so far: 
@@ -596,27 +598,27 @@ Let's sum it all up in one file so far:
 #include <eosiolib/eosio.hpp>
 #include <eosiolib/print.hpp>
 
+using namespace eosio;
+
 class addressbook : public eosio::contract
 {
-  public:
-    using contract::contract;
-    addressbook(name receiver, name code, datastream<const char *> ds) : contract(receiver, code, ds) {}
+public:
+   using contract::contract;
+   addressbook(name receiver, name code, eosio::datastream<const char *> ds) : contract(receiver, code, ds) {}
 
-  private:
-    struct person
-    {
-        name key;
-        std::string full_name;
-        std::string street;
-        std::string city;
-	uint32_t phone;
+private:
+   struct person {
+      name        key;
+      std::string full_name;
+      std::string street;
+      std::string city;
+      uint32_t    phone;
+      
+      uint64_t primary_key() const { return key.value; }
+   };
 
-        uint64_t primary_key() const { return key.value; }
-    };
-
-    typedef eosio::multi_index<"people"_n, person> addressbook_type;
-
-};	
+   using addressbook_type = eosio::multi_index<"people"_n, person>;
+};
 ```
 
 Next, define an action for the user to add or update a record. This action will need to accept any values that this action needs to be able to emplace (create) or modify.
@@ -628,36 +630,52 @@ void upsert(name user, std::string full_name, std::string street, std::string ci
 
 Earlier, it was mentioned that only the user has control over their own record, as this contract is opt-in. To do this, utilize the `require_auth` method provided by the `eosio.cdt` library. 
 
-This method accepts one argument, a name type, and asserts that the account executing the transaction equals the provided value. If this condition returns true, where the user provided as an argument in `upsert` does not equal the authorizing user, the action with unwind all progress before failing. 
+This method accepts one argument, a `name` type, and asserts that the account executing the transaction equals the provided value. If this assertion fails, i.e. the user provided as an argument in `upsert` is not the authorizing user, the action will undo all side-effects that have occurred in the transaction up to that point before failing. 
 
 ```cpp
 void upsert(name user, std::string full_name, std::string street, std::string city, uint32_t phone) {
- require_auth( user );
+   require_auth( user );
 }
 ```
 
-Instantiate the table. Earlier, a multi_index table was configured as `typedef addressbook_type`. To instantiate this table, consider its two required arguments:
-
-* The `"code"`, which represents the contract's account. This value is accessible through the scoped `_code` variable, it can be thought of as "self". 
-* The `"scope"` which declares the account to which the data in this range belongs. In this case, since we only have one table we can use `"_code"` as well. Important to notice, we are passing `_code.value` that returns `_code` in `unit64_t` as that is what `scope` requires.
+We can add other checks on the inputs using the `eosio::check` function. Again, if any of the assertions fail, all side-effects that have occurred so far will be undone and the entire transaction will be rejected.
 
 ```cpp
 void upsert(name user, std::string full_name, std::string street, std::string city, uint32_t phone) {
-  require_auth( user );
-  addressbook_type addresses(_code, _code.value);
+   require_auth( user );
+   check(full_name.size() <= 30, "Full name is too long");
+   check(street.size() <= 30, "Street name is too long");
+   check(city.size() <= 20, "City name is too long");
 }
 ```
 
-Next, query the iterator and setting it to a variable (iterator) since this iterator may be used several times.
+Instantiate the table. Earlier, a `multi_index` table was configured and given a type alias of `addressbook_type`. To instantiate this table, consider its two required arguments:
+
+* The `code` which represents the account owning the persistent state that we will be accessing. Since we will be modifying this state, that account must be the account of this contract, which is accessible through the `get_self()` member function that the `addressbook` class inherited from the `eosio::contract` base class. 
+* The `scope` which can be an arbitrary `uint64_t` value identifying a sub-section under the `code` account in which the data is stored. In this case, since we only have one table we can just use `get_self().value`. Important to notice, we are passing `get_self().value` which returns the `uint64_t` representation of the `get_self()` account rather than simply `get_self()`, because `scope` requires a `uint64_t` type.
 
 ```cpp
 void upsert(name user, std::string full_name, std::string street, std::string city, uint32_t phone) {
-  require_auth( user );
-  eosio_assert(full_name.size() <= 30, "Full name is too long");
-  eosio_assert(street.size() <= 30, "Street name is too long");
-  eosio_assert(city.size() <= 20, "City name is too long");
-  addressbook_type addresses(_code, _code.value);
-  auto iterator = addresses.find(user.value);
+   require_auth( user );
+   check(full_name.size() <= 30, "Full name is too long");
+   check(street.size() <= 30, "Street name is too long");
+   check(city.size() <= 20, "City name is too long");
+   
+   addressbook_type addresses(get_self(), get_self().value);
+}
+```
+
+Next, use the `find` function to lookup the table record that has a primary key equivalent to `user.value`. The return value of the `find` function is an iterator that we will store as a variable called `iterator` since this iterator may be used several times.
+
+```cpp
+void upsert(name user, std::string full_name, std::string street, std::string city, uint32_t phone) {
+   require_auth( user );
+   check(full_name.size() <= 30, "Full name is too long");
+   check(street.size() <= 30, "Street name is too long");
+   check(city.size() <= 20, "City name is too long");
+   
+   addressbook_type addresses(get_self(), get_self().value);
+   auto iterator = addresses.find(user.value);
 }
 ```
 
@@ -665,23 +683,24 @@ Now our function needs to actually add or update the record (if it already exist
 
 ```cpp
 if( iterator == addresses.end() )
-  {
-    //The user isn't in the table
-  }
-  else {
-    //The user is in the table
-  }
+{
+   // The user isn't in the table
+}
+else 
+{
+   // The user is in the table
+}
 ```
 
-If the record doesn't exist, we need to create it, to do this use the `emplace` function:
+If the record doesn't exist, we need to create it. To do this use the `emplace` function:
 
 ```cpp
 addresses.emplace(user, [&]( auto& row ) {
-    row.key = user;
-    row.full_name = full_name;
-    row.street = street;
-    row.city = city;
-    row.phone = phone;
+   row.key       = user;
+   row.full_name = full_name;
+   row.street    = street;
+   row.city      = city;
+   row.phone     = phone;
 });
 ```
 
@@ -689,85 +708,88 @@ If it already exists - we will update it using `modify` function:
 
 ```cpp
 addresses.modify(iterator, user, [&]( auto& row ) {
-    row.key = user;
-    row.full_name = full_name;
-    row.street = street;
-    row.city = city;
-    row.phone = phone
+   row.key       = user;
+   row.full_name = full_name;
+   row.street    = street;
+   row.city      = city;
+   row.phone     = phone;
 });
 ```
 
 Let's put it all together:
 
 ```cpp
-
 #include <eosiolib/eosio.hpp>
 #include <eosiolib/print.hpp>
 
+using namespace eosio;
+
 class addressbook : public eosio::contract
 {
-  public:
-    using contract::contract;
-    addressbook(name receiver, name code, datastream<const char *> ds) : contract(receiver, code, ds) {}
+public:
+   using contract::contract;
+   addressbook(name receiver, name code, eosio::datastream<const char *> ds) : contract(receiver, code, ds) {}
 
-    void upsert(name user, std::string full_name, std::string street, std::string city, uint32_t phone)
-    {
-        require_auth(user);
-        eosio_assert(full_name.size() <= 30, "Full name is too long");
-        eosio_assert(street.size() <= 30, "Street name is too long");
-        eosio_assert(city.size() <= 20, "City name is too long");
-        addressbook_type addresses(_code, _code.value);
-        auto iterator = addresses.find(user.value);
+   void upsert(name user, std::string full_name, std::string street, std::string city, uint32_t phone)
+   {
+      require_auth(user);
+      check(full_name.size() <= 30, "Full name is too long");
+      check(street.size() <= 30, "Street name is too long");
+      check(city.size() <= 20, "City name is too long");
+      
+      addressbook_type addresses(get_self(), get_self().value);
+      auto iterator = addresses.find(user.value);
 
-        if (iterator == addresses.end())
-        {
-            //The user isn't in the table
-            addresses.emplace(user, [&](auto &row) {
-                row.key = user;
-                row.full_name = full_name;
-                row.street = street;
-                row.city = city;
-                row.phone = phone;
-            });
-        }
-        else
-        {
-            //The user is in the table
-            addresses.modify(iterator, user, [&](auto &row) {
-                row.key = user;
-                row.full_name = full_name;
-                row.street = street;
-                row.city = city;
-                row.phone = phone;
-            });
-        }
-    }
+      if (iterator == addresses.end())
+      {
+         // The user isn't in the table
+         addresses.emplace(user, [&](auto &row) {
+            row.key       = user;
+            row.full_name = full_name;
+            row.street    = street;
+            row.city      = city;
+            row.phone     = phone;
+         });
+      }
+      else
+      {
+         // The user is in the table
+         addresses.modify(iterator, user, [&](auto &row) {
+            row.key       = user;
+            row.full_name = full_name;
+            row.street    = street;
+            row.city      = city;
+            row.phone     = phone;
+         });
+      }
+   }
 
-  private:
-    struct person
-    {
-        name key;
-        std::string full_name;
-        std::string street;
-        std::string city;
-        uint32_t phone;
+private:
+   struct person {
+      name        key;
+      std::string full_name;
+      std::string street;
+      std::string city;
+      uint32_t    phone;
+      
+      uint64_t primary_key() const { return key.value; }
+   };
 
-        uint64_t primary_key() const { return key.value; }
-    };
-
-    typedef eosio::multi_index<"people"_n, person> addressbook_type;
-
+   using addressbook_type = eosio::multi_index<"people"_n, person>;
+};
 ```
 
-We also may want to add the `erase` method. Please remember it doesn't remove the record from the history. However, it does remove it from the current state of the database, freeing resources if you are on a resource-limited network. Presently, you are on a single-node local testnet that has not resource-limitations imposed. 
+We also may want to add the `erase` method. Please remember it doesn't remove the record from the history. However, it does remove it from the current state of the database, freeing resources if you are on a resource-limited network. Presently, you are on a single-node local testnet that does not have resource-limitations imposed. 
 
 ```cpp
 void erase(name user) {
-    require_auth(user);
-    addressbook_type addresses(_code, _code.value);
-    auto iterator = addresses.find(user.value);
-    eosio_assert(iterator != addresses.end(), "Record does not exist");
-    addresses.erase(iterator);
+   require_auth(user);
+   
+   addressbook_type addresses(get_self(), get_self().value);
+   
+   auto iterator = addresses.find(user.value);
+   check(iterator != addresses.end(), "Record does not exist");
+   addresses.erase(iterator);
 }
 ```
 
@@ -775,9 +797,9 @@ The contract is now mostly complete. Users can create, modify and erase records.
 
 At the bottom of the file, utilize the `EOSIO_DISPATCH` macro, passing the name of the contract, and our actions `upsert` and `erase`.
 
-This macro handles the apply handlers used by wasm to dispatch calls to specific actions in our contract.
+This macro handles the apply handlers used by WASM to dispatch calls to specific actions in our contract.
 
-Adding the following to the bottom of `addressbook.cpp` will make our `cpp` file compatible with EOSIO's wasm interpreter. Failing to include this declaration may result in an error when deploying the contract.
+Adding the following to the bottom of `addressbook.cpp` will make our `cpp` file compatible with EOSIO's WASM interpreter. Failing to include this declaration may result in an error when deploying the contract.
 
 ```cpp
 EOSIO_DISPATCH( addressbook, (upsert)(erase))
@@ -787,7 +809,7 @@ EOSIO_DISPATCH( addressbook, (upsert)(erase))
 
 `eosio.cdt` includes an ABI Generator, but for it to work will require some minor declarations to our contract.
 
-There are three main types of the ABI annotation that you need to use in order for the ABI Generator to recognise relevant functions and export them to the ABI file correctly:
+There are three main types of the ABI annotation that you need to use in order for the ABI Generator to recognize relevant functions and export them to the ABI file correctly:
 
 ```cpp
 [[eosio::contract]] # This annotation is needed at the contract class definition
@@ -803,69 +825,76 @@ The final version of our file will look like this:
 
 using namespace eosio;
 
-class [[eosio::contract]] addressbook : public eosio::contract {
-
+class [[eosio::contract]] addressbook : public eosio::contract
+{
 public:
-  using contract::contract;
-  
-  addressbook(name receiver, name code,  datastream<const char*> ds): contract(receiver, code, ds) {}
+   using contract::contract;
+   addressbook(name receiver, name code, eosio::datastream<const char *> ds) : contract(receiver, code, ds) {}
 
-  [[eosio::action]]
-  void upsert(name user, std::string full_name, std::string street, std::string city, uint32_t phone) {
-    require_auth( user );
-    addressbook_type addresses(_code, _code.value);
-    auto iterator = addresses.find(user.value);
-    if( iterator == addresses.end() )
-    {
-      addresses.emplace(user, [&]( auto& row ) {
-       row.key = user;
-       row.full_name = full_name;
-       row.street = street;
-       row.city = city;
-       row.phone = phone;
-      });
-    }
-    else {
-      std::string changes;
-      addresses.modify(iterator, user, [&]( auto& row ) {
-        row.key = user;
-        row.full_name = full_name;
-        row.street = street;
-        row.city = city;
-        row.phone = phone;
-      });
-    }
-  }
+   [[eosio::action]]
+   void upsert(name user, std::string full_name, std::string street, std::string city, uint32_t phone)
+   {
+      require_auth(user);
+      check(full_name.size() <= 30, "Full name is too long");
+      check(street.size() <= 30, "Street name is too long");
+      check(city.size() <= 20, "City name is too long");
+      
+      addressbook_type addresses(get_self(), get_self().value);
+      auto iterator = addresses.find(user.value);
 
-  [[eosio::action]]
-  void erase(name user) {
-    require_auth(user);
+      if (iterator == addresses.end())
+      {
+         // The user isn't in the table
+         addresses.emplace(user, [&](auto &row) {
+            row.key       = user;
+            row.full_name = full_name;
+            row.street    = street;
+            row.city      = city;
+            row.phone     = phone;
+         });
+      }
+      else
+      {
+         // The user is in the table
+         addresses.modify(iterator, user, [&](auto &row) {
+            row.key       = user;
+            row.full_name = full_name;
+            row.street    = street;
+            row.city      = city;
+            row.phone     = phone;
+         });
+      }
+   }
 
-    addressbook_type addresses(_self, _code.value);
-
-    auto iterator = addresses.find(user.value);
-    eosio_assert(iterator != addresses.end(), "Record does not exist");
-    addresses.erase(iterator);
-  }
+   [[eosio::action]]
+   void erase(name user) {
+      require_auth(user);
+      
+      addressbook_type addresses(get_self(), get_self().value);
+      
+      auto iterator = addresses.find(user.value);
+      check(iterator != addresses.end(), "Record does not exist");
+      addresses.erase(iterator);
+   }
 
 private:
-  struct [[eosio::table]] person {
-    name key;
-    std::string full_name;
-    std::string street;
-    std::string city;
-    uint32_t phone;
-    uint64_t primary_key() const { return key.value; }
+   struct [[eosio::table]] person {
+      name        key;
+      std::string full_name;
+      std::string street;
+      std::string city;
+      uint32_t    phone;
+      
+      uint64_t primary_key() const { return key.value; }
+   };
 
-  };
-  typedef eosio::multi_index<"people"_n, person> addressbook_type;
-
+   using addressbook_type = eosio::multi_index<"people"_n, person>;
 };
 
 EOSIO_DISPATCH( addressbook, (upsert)(erase))
 ```
 
-We have our table, let's test it now. First, we need to create couple of accounts:
+We have our table, let's test it now. First, we need to create couple of accounts.
 
 Create a user account so we can test adding contact details to the address book. Replace `PUBLICKEY` with the public key you set aside earlier. 
 
@@ -873,7 +902,7 @@ Create a user account so we can test adding contact details to the address book.
 cleos create account eosio josh PUBLICKEY
 ```
 
-Create another account, this one will be used to store the smart contract for the address book
+Create another account, this one will be used to store the smart contract for the address book.
 
 ```bash
 cleos create account eosio addressbook PUBLICKEY
@@ -919,13 +948,13 @@ The result should look like this:
 }
 ```
 
-What if we now need to update the first name?
+What if we now need to update his address?
 
 ```bash
 cleos push action addressbook upsert '["josh", "Joshua A", "Market St", "San Francisco, CA", 123456]' -p josh
 ```
 
-You should get the following result by repeating the last cleos command:
+You should get the following result by repeating the previous `cleos get table` command:
 
 ```json
 {

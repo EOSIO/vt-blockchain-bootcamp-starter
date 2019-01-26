@@ -9,6 +9,9 @@ fi
 # Install Dependencies
 apt install -y curl sed
 
+# Install jq
+mkdir -p ~/bin && curl -sSL -o ~/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && chmod +x ~/bin/jq && export PATH=$PATH:~/bin
+
 # Install Node.js and NPM
 curl -sL https://deb.nodesource.com/setup_10.x | bash -
 apt install -y nodejs

@@ -10,7 +10,9 @@ Continue to next step
 
 ### Windows
 
-Please [follow the Windows Preparation Guide](windows.md). 
+Please [use a Virtuan Machine](virtual-machine.md).  
+
+**Note: We have removed WSL until standing issues have been addressed** 
 
 ## Step 2: Guided Lesson
 

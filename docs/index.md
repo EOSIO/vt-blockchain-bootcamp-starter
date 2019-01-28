@@ -10,7 +10,7 @@ Continue to next step
 
 ### Windows
 
-Please [use a Virtuan Machine](virtual-machine.md).  
+Please [use a Virtual Machine](virtual-machine.md).  
 
 **Note: We have removed WSL until standing issues have been addressed** 
 

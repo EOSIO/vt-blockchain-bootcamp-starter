@@ -7,7 +7,7 @@ if [ "$(id -u)" -ne 0 ]; then
 fi 
 
 # Install Dependencies
-apt install -y curl sed
+apt install -y curl sed jq
 
 # Install Node.js and NPM
 curl -sL https://deb.nodesource.com/setup_10.x | bash -

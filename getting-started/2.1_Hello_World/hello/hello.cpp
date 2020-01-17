@@ -11,4 +11,4 @@ class [[eosio::contract]] hello : public contract {
       require_auth( user );
       print( "Hello, ", user );
     }
-}
+};

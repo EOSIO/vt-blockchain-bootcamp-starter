@@ -36,7 +36,6 @@ public:
         row.city = city;
         row.state = state;
       });
-    }
   }
 
   [[eosio::action]]

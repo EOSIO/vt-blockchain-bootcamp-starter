@@ -1,14 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-    <title>eosio bootstrap</title>
+    <title>Address Book Example App</title>
+    <script src='dist-web/eosjs-api.js'></script>
+    <script src='dist-web/eosjs-jsonrpc.js'></script>
+    <script src='dist-web/eosjs-jssig.js'></script>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+
+      th, td {
+        border: 1px solid black;
+        padding: 4px;
+      }
+    </style>
   </head>
-  <body style="margin:0;padding:0;background:#fafafa">
-    <div id="root"></div>
+
+  <body>
+    <h1>Address Book Example App</h1>
+    <h3>Create or Update Entry in Address Book.</h3>
+    <label for="create-user-select">Choose a user to add/update in the addressbook:</label><br/>
+    <select name="create_user_select" id="create-user-select">
+      <option value="">--Please choose an option--</option>
+      <option value="bob">Bob</option>
+      <option value="alice">Alice</option>
+      <option value="john">John</option>
+      <option value="billy">Billy</option>
+    </select>
+    <br/>
+    <br/>
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first-name" name="first_name">
+    <br/>
+    <label for="last_name">Last Name</label>
+    <input type="text" id="last-name" name="last_name">
+    <br/>
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age">
+    <br/>
+    <label for="street">Street:</label>
+    <input type="text" id="street" name="street">
+    <br/>
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city">
+    <br/>
+    <label for="state">State:</label>
+    <input type="text" id="state" name="state">
+    <br/>
+    <button onclick="create_entry();">Submit</button>
+    <h3>View the address book.</h3>
+    <label for="filter-age">Age: (if empty, shows all entries. if set, shows only entries with age &gt;= input)</label><br/>
+    <input type="text" id="filter-age" name="filter_age">
+    <button onclick="get_table();">View</button>
+    <br/>
+    <br/>
+    <br/>
+    <table id="results-tbl" style="display: none;">
+      <thead>
+        <tr>
+          <th scope="col">Key</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">Street</th>
+          <th scope="col">City</th>
+          <th scope="col">State</th>
+        </tr>
+      </thead>
+      <tbody id="results-tbl-body">
+      </tbody>
+    </table>
+    <h3>Erase Entry in Address Book.</h3>
+    <label for="erase-user-select">Choose an entry to remove from the addressbook:</label><br/>
+    <select name="erase_user_select" id="erase-user-select">
+      <option value="">--Please choose an option--</option>
+      <option value="bob">Bob</option>
+      <option value="alice">Alice</option>
+      <option value="john">John</option>
+      <option value="billy">Billy</option>
+    </select>
+    <br/>
+    <button onclick="erase_entry();">Erase</button>
+
+    <pre id="logs"></pre>
   </body>
+
+  <script src='index.js'></script>
 </html>

@@ -13,5 +13,5 @@ cleos create account eosio addressbook EOS5jqNp117CFQVnQ634sgEtffQjGkve7sPw1jG2b
 
 eosio-cpp contracts/addressbook.cpp
 
-cleos set code addressbook contracts/addressbook.wasm -p addressbook@active
-cleos set abi addressbook contracts/addressbook.abi -p addressbook@active
+cleos set code addressbook addressbook.wasm -p addressbook@active
+cleos set abi addressbook addressbook.abi -p addressbook@active

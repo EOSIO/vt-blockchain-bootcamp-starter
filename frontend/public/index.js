@@ -25,7 +25,7 @@ const privateKeys = [
 ];
 
 // The JsonRpc class is used for communicating directly with a node's RPC API.
-const rpc = new eosjs_jsonrpc.JsonRpc('http://127.0.0.1:8888');
+const rpc = new eosjs_jsonrpc.JsonRpc('/chain');
 
 // The JsSignatureProvider handles using private keys to sign transactions.
 const signatureProvider = new eosjs_jssig.JsSignatureProvider(privateKeys);

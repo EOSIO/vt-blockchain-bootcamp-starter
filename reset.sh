@@ -1,3 +1,3 @@
 #!/bin/bash
-stop.sh
+./stop.sh
 rm -rf ~/eosio/chain/data

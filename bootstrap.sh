@@ -10,8 +10,13 @@ cleos create account eosio alice EOS83cWh7iL5SpFLV4etAUQhTtKnYjKtCSeixaAK6TBzBf8
 cleos create account eosio john EOS8dKWrRLHx1tULVjVeKJ6TRmRAjgrd51tSzDw3QQbo6FZZuyGKL
 cleos create account eosio billy EOS5GDiCs18KTntwp5Uba3Vy5qRgNvH4FBt61YCgfWRUEGJ4hdqT1
 cleos create account eosio addressbook EOS5jqNp117CFQVnQ634sgEtffQjGkve7sPw1jG2bn3eDjYWJ12Tk
+cleos create account eosio eosio.token EOS5jqNp117CFQVnQ634sgEtffQjGkve7sPw1jG2bn3eDjYWJ12Tk
 
-eosio-cpp contracts/addressbook.cpp
+eosio-cpp contracts/addressbook.cpp -o addressbook.wasm
+eosio-cpp contracts/eosio.token.cpp -o eosio.token.wasm
 
 cleos set code addressbook addressbook.wasm -p addressbook@active
 cleos set abi addressbook addressbook.abi -p addressbook@active
+
+cleos set code eosio.token eosio.token.wasm
+cleos set abi eosio.token eosio.token.abi
